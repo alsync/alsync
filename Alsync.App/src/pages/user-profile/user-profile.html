@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ "USE_RPROFILE_TITLE" | translate }}</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="option()">
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content class="outer-content">
+    <ion-list>
+        <ion-item>
+            <ion-avatar item-start>
+                <img [src]="item.avatar" />
+            </ion-avatar>
+            <h2>
+                {{ item.alias ? item.alias : item.name }}
+                <ion-icon name="female" color="danger"></ion-icon>
+            </h2>
+            <p *ngIf="item.about">{{ item.about }}</p>
+        </ion-item>
+    </ion-list>
+
+    <ion-list>
+        <ion-item *ngIf="item.region">
+            <ion-label fixed>{{ "REGION" | translate }}</ion-label>
+            <ion-label>{{ item.region }}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="item.company">
+            <ion-label fixed>{{ "COMPANY" | translate }}</ion-label>
+            <ion-label>{{ item.company }}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="item.address">
+            <ion-label fixed>{{ "ADDRESS" | translate }}</ion-label>
+            <ion-label text-wrap>{{ item.address }}</ion-label>
+        </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="item.phones">
+        <ion-list-header>
+            {{ "PHONES" | translate }}
+        </ion-list-header>
+        <ion-item *ngFor="let p of item.phones">
+            {{ p.phone }}
+        </ion-item>
+    </ion-list>
+
+    <ion-list padding *ngIf="!item.followed">
+        <button ion-button block>
+                {{ "FOLLOW" | translate }}
+            </button>
+    </ion-list>
+</ion-content>

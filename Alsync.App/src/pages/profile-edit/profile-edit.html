@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-navbar>
+        <!-- <ion-title>{{ pageTitle }}</ion-title> -->
+         <ion-buttons start>
+            <button ion-button (click)="cancel()">
+                <span color="primary" showWhen="ios">
+                {{ 'CANCEL_BUTTON' }}
+                </span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons> 
+        <ion-buttons end>
+             <button ion-button (click)="done()" [disabled]="!isReadyToSave" strong>
+                <span color="primary" showWhen="ios">
+                {{ 'DONE_BUTTON' }}
+                </span>
+                <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
+            </button> 
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content">
+    <form [formGroup]="form">
+        <ion-list>
+            <button ion-item>
+                <ion-label>{{ 'Avatar' }}</ion-label>
+                <ion-avatar item-end>
+                    <img [src]="currentUser.avatar">
+                </ion-avatar>
+            </button>
+            <ion-item>
+                <ion-label>{{ 'Name' }}</ion-label>
+                <ion-input item-end formControlName="name">
+                </ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>{{ 'Gender' }}</ion-label>
+                <ion-input item-end formControlName="gender">
+                </ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>{{ 'Company' }}</ion-label>
+                <ion-input item-end formControlName="company">
+                </ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list *ngIf="currentUser.phones">
+            <ion-list-header>
+                Phones
+            </ion-list-header>
+            <ion-item>
+                <ion-icon name="add-circle"></ion-icon>
+                add phone
+            </ion-item>
+            <ion-item *ngFor="let phone of currentUser.phones">
+                {{phone}}
+            </ion-item>
+        </ion-list>
+    </form>
+    <p>
+        {{form.value|json}}
+    </p>
+</ion-content>

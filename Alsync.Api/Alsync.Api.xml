@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Alsync.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Alsync.Api.Controllers.TokenController.Authentication">
+            <summary>
+            JWT授权验证。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Alsync.Api.Controllers.ValuesController">
+            <summary>
+            测试
+            </summary>
+        </member>
+        <member name="M:Alsync.Api.Controllers.ValuesController.Get">
+            <summary>
+            列表
+            </summary>
+            <returns>返回数组</returns>
+        </member>
+    </members>
+</doc>

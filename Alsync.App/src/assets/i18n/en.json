@@ -1,0 +1,47 @@
+{
+    "BACK_BUTTON_TEXT" : "Back",
+
+    "DONE_BUTTON":"Done",
+
+    "AVATAR": "Avatar",
+    "NAME": "Name",
+    "GENDER": "Gender",
+    "REGION": "Region",
+    "COMPANY": "Company",
+    "ADDRESS": "Address",
+    "PHONES": "Phones",
+    "FANS": "Follow Me",
+    "SETTINGS": "Settings",
+    "ACCOUNT": "Account",
+    "NOTIFICATIONS": "Notifications",
+    "PRIVACY": "Privacy",
+    "GENERAL": "General",
+    "ABOUT & HELP": "About & Help",
+    "FOLLOW": "Follow",
+    "UNFOLLOW": "Unfollow",
+    
+    "FAVORITES_TAB_TITLE": "Favorites",
+    "MESSAGE_TAB_TITLE": "Message",
+    "CONTACTS_TAB_TITLE": "Contacts",
+    "FOLLOWS_TAB_TITLE": "Follows",
+    "ME_TAB_TITLE": "Me",
+
+    "FOLLOWS_TITLE": "Follows",
+    "SEARCH_PLACEHOLDER": "Search",
+    "SEARCH_TITLE": "Add Contacts",
+    "SEARCH_CONTACTS_PLACEHOLDER": "Phone",
+    "USE_RPROFILE_TITLE": "User Profile",
+
+    "PERSONAL_TITLE": "Me",
+    "PHONES_TITLE": "Phones",
+    "PHONE_PLACEHOLDER":"Phone",
+    "FANS_TITLE": "Follow Me",
+    "SETTINGS_TITLE": "Settings",
+
+    "PROFILE_TITLE": "Profile",
+    "AVATAR_TITLE": "Avatar",
+    "NAME_TITLE": "Name",
+    "GENDER_TITLE": "Gender",
+    "COMPANY_TITLE": "Company",
+    "ADDRESS_TITLE": "Address"
+}

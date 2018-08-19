@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ 'PHONES_TITLE' | translate }}</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="done()" [disabled]="!isReadyToSave" strong>
+                <span color="primary" showWhen="ios">
+                {{ 'DONE_BUTTON' | translate }}
+                </span>
+                <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+        <!-- <ion-buttons end>
+            <button ion-button icon-only (click)="addItem()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons> -->
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content">
+    <form>
+        <ion-list *ngIf="currentUser.phones">
+            <ion-item-sliding *ngFor="let p of currentUser.phones">
+                <ion-item>
+                    <!-- <ion-label fixed>{{ p.label }}</ion-label> -->
+                    <ion-icon name="remove-circle" color="danger" item-start></ion-icon>
+                    <!-- <ion-label>mobile</ion-label> -->
+                    <!-- <ion-input type="text" placeholder="Phone" [value]="phone" clearInput></ion-input> -->
+                    <!-- <h6>{{ p.label }}</h6> -->
+                    <!-- {{ p.phone }} -->
+                    <ion-input placeholder="{{ 'PHONE_PLACEHOLDER' | translate }}" #box [value]="p.phone" (keyup)="change(p.phone, box.value)" clearInput></ion-input>
+                </ion-item>
+                <ion-item-options>
+                    <button ion-button color="danger" (click)="deleteItem(item)">
+                    <!-- {{ 'DELETE_BUTTON' | translate }} -->
+                    {{ 'DELETE' | translate }}
+                </button>
+                </ion-item-options>
+            </ion-item-sliding>
+            <!-- <ion-item-sliding #slidingItem>
+                <ion-item #item>
+                    <ion-icon name="remove-circle" color="danger" item-start (click)="slideItem(slidingItem, item)"></ion-icon>
+                    <ion-input placeholder="Phone" clearInput></ion-input>
+                </ion-item>
+                <ion-item-options>
+                    <button ion-button color="danger" (click)="deleteItem(item)">
+                        {{ 'DELETE_BUTTON' | translate }} 
+                        {{ 'Delete' }}
+                    </button>
+                </ion-item-options>
+            </ion-item-sliding> -->
+            <ion-item (click)="addItem()">
+                <ion-icon name="add-circle" color="secondary" item-start></ion-icon>
+                add phone
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>

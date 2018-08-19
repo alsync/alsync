@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ "PROFILE_TITLE" | translate }}</ion-title>
+        <!-- <ion-buttons end>
+            <button ion-button (click)="done()" [disabled]="!isReadyToSave" strong>
+                <span color="primary" showWhen="ios">
+                {{ 'DONE_BUTTON' }}
+                </span>
+                <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
+            </button>
+        </ion-buttons> -->
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content">
+    <ion-list>
+        <button ion-item>
+            <ion-label>{{ "AVATAR" | translate }}</ion-label>
+            <ion-avatar item-end>
+                <img [src]="currentUser.avatar">
+            </ion-avatar>
+        </button>
+        <button ion-item>
+            <ion-label fixed>{{ "NAME" | translate }}</ion-label>
+            <ion-note item-end>{{currentUser.name}}</ion-note>
+        </button>
+        <button ion-item>
+            <ion-label fixed>{{ "GENDER" | translate }}</ion-label>
+            <ion-note item-end>{{currentUser.gender}}</ion-note>
+        </button>
+        <button ion-item>
+            <ion-label fixed>{{ "COMPANY" | translate }}</ion-label>
+            <ion-note item-end>{{currentUser.company}}</ion-note>
+        </button>
+        <button ion-item>
+            <ion-label fixed>{{ "ADDRESS" | translate }}</ion-label>
+            <ion-note item-end>{{currentUser.address}}</ion-note>
+        </button>
+    </ion-list>
+</ion-content>

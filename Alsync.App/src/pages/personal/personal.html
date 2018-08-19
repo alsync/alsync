@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ "PERSONAL_TITLE" | translate }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content">
+    <ion-list>
+        <button ion-item (click)="openProfile(ProfilePage)">
+            <ion-avatar item-start>
+                <img [src]="currentUser.avatar" />
+            </ion-avatar>
+            <h2>{{ currentUser.name }}</h2>
+            <p>计算机软件 | {{ currentUser.company }}</p>
+        </button>
+    </ion-list>
+
+    <ion-list *ngFor="let g of pageGroups">
+        <button ion-item *ngFor="let p of g.pages" (click)="openPage(p)">            
+            <ion-icon [name]="p.icon" item-start></ion-icon>
+            {{ p.title | translate }}
+        </button>
+    </ion-list>
+</ion-content>

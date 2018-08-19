@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ "SETTINGS_TITLE" | translate }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content">
+    <ion-list>
+        <button ion-item>
+            <ion-label>{{ "ACCOUNT" | translate }}</ion-label>            
+        </button>
+    </ion-list>
+
+    <ion-list>
+        <button ion-item>
+            <ion-label>{{ "NOTIFICATIONS" | translate }}</ion-label>
+        </button>
+        <button ion-item>
+            <ion-label>{{ "PRIVACY" | translate }}</ion-label>
+        </button>
+        <button ion-item>
+            <ion-label>{{ "GENERAL" | translate }}</ion-label>
+        </button>
+    </ion-list>
+
+    <ion-list>
+        <button ion-item>
+            <ion-label>{{ "ABOUT & HELP" | translate }}</ion-label>
+        </button>
+    </ion-list>
+
+    <ion-list padding>
+        <button ion-button block>
+            {{'Logout'}}
+        </button>
+    </ion-list>
+</ion-content>

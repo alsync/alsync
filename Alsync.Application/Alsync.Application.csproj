@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Alsync.Domain\Alsync.Domain.csproj" />
+    <ProjectReference Include="..\Alsync.IApplication\Alsync.IApplication.csproj" />
+    <ProjectReference Include="..\Alsync.Infrastructure\Alsync.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
