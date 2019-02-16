@@ -9,7 +9,6 @@ namespace Alsync.Infrastructure.Repositories
     public class UserRepository : Repository<User>, IUserRepository
     {
         public UserRepository(IRepositoryContext context)
-            : base(context) {
-        }
+            : base(context) { }
     }
 }

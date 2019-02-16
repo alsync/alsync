@@ -11,6 +11,8 @@ namespace Alsync.Domain.Models
 
         public string UserName { get; private set; }
 
+        public FullName FullName { get; private set; }
+
         public string Password { get; private set; }
 
         /// <summary>

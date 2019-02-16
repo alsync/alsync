@@ -11,7 +11,7 @@ namespace Alsync.Infrastructure.Repositories
     public abstract class Repository<TEntity> : IRepository<TEntity>
          where TEntity : class, IAggregateRoot
     {
-        public IRepositoryContext Context { get; set; }
+        protected IRepositoryContext Context { get; private set; }
 
         public Repository(IRepositoryContext context)
         {
