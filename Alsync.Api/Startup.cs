@@ -11,11 +11,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-//using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
 using System.IO;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,9 +52,7 @@ namespace Alsync.Api
                     Version = "v1",
                     Title = "Alsync Api"
                 });
-                //var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                //var xmlPath = Path.Combine(basePath, "Alsync.Api.xml");
-                //options.IncludeXmlComments(xmlPath);
+                Directory.GetFiles(AppContext.BaseDirectory, "*.xml").ToList().ForEach(p => options.IncludeXmlComments(p));
             });
 
             //var pathToDoc = Configuration["Swagger:FileName"];
@@ -141,8 +140,12 @@ namespace Alsync.Api
 
             app.UseMvc();
 
-            app.UseSwagger(options => options.PreSerializeFilters.Add((swagger, httpReq) => swagger.Host = httpReq.Host.Value));
-            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs"));
+            app.UseSwagger(options => options.PreSerializeFilters.Add((swagger, httpReq) => swagger.Host = httpReq.Host.Value))
+                .UseSwaggerUI(options =>
+                {
+                    options.RoutePrefix = "help";
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
+                });
         }
     }
 }
