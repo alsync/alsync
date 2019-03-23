@@ -13,13 +13,9 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alsync.Api.Controllers
+namespace Alsync.Api.V2.Controllers
 {
-    [AllowAnonymous]
-    [Produces("application/json")]
-    [Route("api/[controller]")]
-    [ApiController]
-    public class TokenController : ControllerBase
+    public class TokenController : HttpController
     {
         public IConfiguration Configuration { get; }
 
@@ -37,16 +33,16 @@ namespace Alsync.Api.Controllers
         {
             //return Unauthorized();
             var payloadConfig = this.Configuration.GetSection("Jwt").GetSection("Payload");
-            var key = Encoding.ASCII.GetBytes(payloadConfig["secret"]);
+            var key = Encoding.UTF8.GetBytes(payloadConfig["secret"]);
             var authTime = DateTime.UtcNow;
             var expiresAt = authTime.AddDays(7);
             var claims = new Claim[]
             {
-                    new Claim(JwtRegisteredClaimNames.Sub, "一个主题"),  //sub has changed to nameidentifier.
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    //new Claim(JwtRegisteredClaimNames.Sub, "一个主题"),  //sub has changed to nameidentifier.
+                    //new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(ClaimTypes.Name, "user"),
-                    new Claim(ClaimTypes.Gender ,"male"),
-                    new Claim(ClaimTypes.GivenName ,"张三")
+                    //new Claim(ClaimTypes.Gender ,"male"),
+                    //new Claim(ClaimTypes.GivenName ,"张三")
             };
             //var tokenDescriptor = new SecurityTokenDescriptor
             //{

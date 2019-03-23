@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Alsync.IApplication;
+using Alsync.Infrastructure.Results;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Alsync.IApplication;
-using Alsync.Infrastructure.Results;
 
 namespace Alsync.Api.Controllers
 {
@@ -34,8 +35,13 @@ namespace Alsync.Api.Controllers
             };
         }
 
-        [HttpGet]
-        public HttpResult Get()
+        /// <summary>
+        /// 注销登录。
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet("signout")]
+        public HttpResult SignOut()
         {
             this._userService.Login("abc", "abc");
             return new HttpResult

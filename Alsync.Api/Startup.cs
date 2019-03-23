@@ -61,33 +61,33 @@ namespace Alsync.Api
                     }
                 };
                 //JwtBearer认证配置
-                var key = Encoding.ASCII.GetBytes(payloadConfig["Secret"]);
+                var key = Encoding.UTF8.GetBytes(payloadConfig["Secret"]);
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    NameClaimType = ClaimTypes.Name,
-                    RoleClaimType = ClaimTypes.Role,
-
                     ValidIssuer = payloadConfig["iss"],
-
                     ValidAudience = payloadConfig["aud"],
-
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-
-
-                    /***********************************TokenValidationParameters的参数默认值***********************************/
-                    // RequireSignedTokens = true,
-                    // SaveSigninToken = false,
-                    // ValidateActor = false,
-                    // 将下面两个参数设置为false，可以不验证Issuer和Audience，但是不建议这样做。
-                    //ValidateAudience = true,
-                    //ValidateIssuer = true,
-                    // ValidateIssuerSigningKey = false,
-                    // 是否要求Token的Claims中必须包含Expires
-                    // RequireExpirationTime = true,
-                    // 允许的服务器时间偏移量
-                    // ClockSkew = TimeSpan.FromSeconds(300),
-                    // 是否验证Token有效期，使用当前时间与Token的Claims中的NotBefore和Expires对比
-                    // ValidateLifetime = true
+                };
+            })
+            .AddJwtBearer("Admin", options =>
+            {
+                //JwtBearer认证中，默认是通过Http的Authorization头来获取的，这也是最推荐的做法，但是在某些场景下，我们可能会使用Url或者是Cookie来传递Token
+                //http://www.cnblogs.com/RainingNight/p/jwtbearer-authentication-in-asp-net-core.html#自定义token获取方式
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = async context =>
+                    {
+                        context.Token = context.Request.Query["access_token"];
+                        await Task.CompletedTask;
+                    }
+                };
+                //JwtBearer认证配置
+                var key = Encoding.UTF8.GetBytes(payloadConfig["Secret"]);
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = payloadConfig["iss"],
+                    ValidAudience = payloadConfig["aud"],
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
                 };
             });
 
@@ -104,6 +104,8 @@ namespace Alsync.Api
                     Title = "Alsync Api"
                 });
                 Directory.GetFiles(AppContext.BaseDirectory, "*.xml").ToList().ForEach(p => options.IncludeXmlComments(p));
+
+                options.OperationFilter<HttpHeaderOperationFilter>();
             });
 
             //var pathToDoc = Configuration["Swagger:FileName"];
