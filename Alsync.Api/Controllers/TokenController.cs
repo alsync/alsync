@@ -1,23 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.Extensions.Configuration;
+﻿using Alsync.Infrastructure.Results;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Alsync.Api.Controllers
 {
     [AllowAnonymous]
     [Produces("application/json")]
-    [Route("api/Token")]
-    public class TokenController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class TokenController : ControllerBase
     {
         public IConfiguration Configuration { get; }
 
@@ -31,7 +33,7 @@ namespace Alsync.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Authentication()
+        public HttpResult Authentication()
         {
             //return Unauthorized();
             var payloadConfig = this.Configuration.GetSection("Jwt").GetSection("Payload");
@@ -67,16 +69,20 @@ namespace Alsync.Api.Controllers
                 expires: expiresAt,
                 signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature));
             var access_token = tokenHandler.WriteToken(jwtToken);
-            return Ok(new
+            return new HttpResult<dynamic>
             {
-                access_token,
-                token_type = JwtBearerDefaults.AuthenticationScheme,
-                profile = new
+                Result = true,
+                Data = new
                 {
-                    auth_time = new DateTimeOffset(authTime).ToUnixTimeSeconds(),
-                    expires_at = new DateTimeOffset(expiresAt).ToUnixTimeSeconds()
+                    access_token,
+                    token_type = JwtBearerDefaults.AuthenticationScheme,
+                    profile = new
+                    {
+                        auth_time = new DateTimeOffset(authTime).ToUnixTimeSeconds(),
+                        expires_at = new DateTimeOffset(expiresAt).ToUnixTimeSeconds()
+                    }
                 }
-            });
+            };
         }
     }
 }

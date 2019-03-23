@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\Projects\Alsync\Alsync.Api\Alsync.Api.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netcoreapp2.1\Alsync.Api.xml</DocumentationFile>
+    <OutputPath></OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Alsync.Api.V1\Alsync.Api.V1.csproj" />
+    <ProjectReference Include="..\Alsync.Api.V2\Alsync.Api.V2.csproj" />
     <ProjectReference Include="..\Alsync.Application\Alsync.Application.csproj" />
     <ProjectReference Include="..\Alsync.Domain.Repositories\Alsync.Domain.Repositories.csproj" />
     <ProjectReference Include="..\Alsync.IApplication\Alsync.IApplication.csproj" />

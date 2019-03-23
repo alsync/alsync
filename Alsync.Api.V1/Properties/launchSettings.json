@@ -1,9 +1,9 @@
-{
+﻿{
   "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
+    "windowsAuthentication": false, 
+    "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:2617/",
+      "applicationUrl": "http://localhost:4614",
       "sslPort": 0
     }
   },
@@ -15,13 +15,13 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Alsync.Api": {
+    "Alsync.Api.V1": {
       "commandName": "Project",
       "launchBrowser": true,
+      "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://localhost:2618/"
+      }
     }
   }
 }

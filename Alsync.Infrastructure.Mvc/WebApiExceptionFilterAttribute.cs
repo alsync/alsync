@@ -1,9 +1,10 @@
 ﻿using Alsync.Infrastructure.Exceptions;
 using Alsync.Infrastructure.Results;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace Alsync.Infrastructure.Mvc
 {
@@ -17,9 +18,10 @@ namespace Alsync.Infrastructure.Mvc
             {
                 if (exception is ValidationException)
                 {
-                    var args = new HttpResult { Result = false, Message = exception.Message };
+                    var result = new HttpResult { Result = false, Message = exception.Message };
+                    context.Result = new JsonResult(result);
 
-                    context.HttpContext.Response.ContentType = "text/plain";
+                    context.HttpContext.Response.ContentType = "application/json";
                     await context.HttpContext.Response.WriteAsync("Status code page, status code: " + context.HttpContext.Response.StatusCode);
                 }
             }

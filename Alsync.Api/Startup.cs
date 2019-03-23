@@ -17,6 +17,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,42 +37,10 @@ namespace Alsync.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AlsyncDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc(options =>
-            {
-                //options.Filters.Add(typeof(WebApiExceptionFilterAttribute));
-            });
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRepositoryContext, AlsyncRepositoryContext>();
-
-            services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new Info
-                {
-                    Version = "v1",
-                    Title = "Alsync Api"
-                });
-                Directory.GetFiles(AppContext.BaseDirectory, "*.xml").ToList().ForEach(p => options.IncludeXmlComments(p));
-            });
-
-            //var pathToDoc = Configuration["Swagger:FileName"];
-            //services.ConfigureSwaggerGen(options =>
-            //{
-            //    options.SwaggerDoc("v1",
-            //        new Info
-            //        {
-            //            Title = "Geo Search API",
-            //            Version = "v1",
-            //            Description = "A simple api to search using geo location in Elasticsearch",
-            //            TermsOfService = "None"
-            //        }
-            //     );
-
-            //    var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, pathToDoc);
-            //    options.IncludeXmlComments(filePath);
-            //    options.DescribeAllEnumsAsStrings();
-            //});
 
             var payloadConfig = this.Configuration.GetSection("Jwt").GetSection("Payload");
             services.AddAuthentication(options =>
@@ -121,6 +90,46 @@ namespace Alsync.Api
                     // ValidateLifetime = true
                 };
             });
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "Alsync Api"
+                });
+                options.SwaggerDoc("v2", new Info
+                {
+                    Version = "v2",
+                    Title = "Alsync Api"
+                });
+                Directory.GetFiles(AppContext.BaseDirectory, "*.xml").ToList().ForEach(p => options.IncludeXmlComments(p));
+            });
+
+            //var pathToDoc = Configuration["Swagger:FileName"];
+            //services.ConfigureSwaggerGen(options =>
+            //{
+            //    options.SwaggerDoc("v1",
+            //        new Info
+            //        {
+            //            Title = "Geo Search API",
+            //            Version = "v1",
+            //            Description = "A simple api to search using geo location in Elasticsearch",
+            //            TermsOfService = "None"
+            //        }
+            //     );
+
+            //    var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, pathToDoc);
+            //    options.IncludeXmlComments(filePath);
+            //    options.DescribeAllEnumsAsStrings();
+            //});
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(WebApiExceptionFilterAttribute));
+            })
+            .AddApplicationPart(typeof(V1.Controllers.HttpController).Assembly)
+            .AddApplicationPart(typeof(V2.Controllers.HttpController).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -143,8 +152,9 @@ namespace Alsync.Api
             app.UseSwagger(options => options.PreSerializeFilters.Add((swagger, httpReq) => swagger.Host = httpReq.Host.Value))
                 .UseSwaggerUI(options =>
                 {
-                    options.RoutePrefix = "help";
+                    options.RoutePrefix = string.Empty;
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
+                    options.SwaggerEndpoint("/swagger/v2/swagger.json", "V2 Docs");
                 });
         }
     }

@@ -20,8 +20,12 @@ namespace Alsync.Api.Controllers
             this._userService = userService;
         }
 
-        [HttpPost]
-        public HttpResult Post()
+        /// <summary>
+        /// 登录。
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("signin")]
+        public HttpResult SignIn()
         {
             this._userService.Login("abc", "abc");
             return new HttpResult
