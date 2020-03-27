@@ -12,9 +12,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -93,12 +95,12 @@ namespace Alsync.Api
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new Info
+                options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
                     Title = "Alsync Api"
                 });
-                options.SwaggerDoc("v2", new Info
+                options.SwaggerDoc("v2", new OpenApiInfo
                 {
                     Version = "v2",
                     Title = "Alsync Api"
@@ -145,13 +147,25 @@ namespace Alsync.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseRouting();
+
             app.UseStatusCodePages();
 
             app.UseAuthentication();
 
-            app.UseMvc();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
-            app.UseSwagger(options => options.PreSerializeFilters.Add((swagger, httpReq) => swagger.Host = httpReq.Host.Value))
+            app.UseSwagger(options =>
+            {
+                options.PreSerializeFilters.Add((swagger, httpReq) =>
+                {
+                    swagger.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}" } };
+                });
+            })
                 .UseSwaggerUI(options =>
                 {
                     options.RoutePrefix = string.Empty;

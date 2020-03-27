@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Presentation", "01-Presentation", "{1D323727-5B35-4681-B214-311F790C7D41}"
 EndProject
@@ -31,9 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.Web", "Alsync.Web\Al
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.Rest", "Alsync.Rest\Alsync.Rest.csproj", "{B31D766B-DCCE-4080-957E-B741DF151663}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsync.Api.V1", "Alsync.Api.V1\Alsync.Api.V1.csproj", "{BAD41D41-9B6F-4FCE-ABFF-257BDD42FD9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.Api.V1", "Alsync.Api.V1\Alsync.Api.V1.csproj", "{BAD41D41-9B6F-4FCE-ABFF-257BDD42FD9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsync.Api.V2", "Alsync.Api.V2\Alsync.Api.V2.csproj", "{5C9A4584-7090-4EAE-BA35-388095726D53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.Api.V2", "Alsync.Api.V2\Alsync.Api.V2.csproj", "{5C9A4584-7090-4EAE-BA35-388095726D53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsync.Infrastructure.Redis", "Alsync.Infrastructure.Redis\Alsync.Infrastructure.Redis.csproj", "{E5F63CA9-1B51-4081-A2BE-9296FFB3C3DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +91,10 @@ Global
 		{5C9A4584-7090-4EAE-BA35-388095726D53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C9A4584-7090-4EAE-BA35-388095726D53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C9A4584-7090-4EAE-BA35-388095726D53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5F63CA9-1B51-4081-A2BE-9296FFB3C3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5F63CA9-1B51-4081-A2BE-9296FFB3C3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5F63CA9-1B51-4081-A2BE-9296FFB3C3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5F63CA9-1B51-4081-A2BE-9296FFB3C3DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -106,6 +112,7 @@ Global
 		{B31D766B-DCCE-4080-957E-B741DF151663} = {1D323727-5B35-4681-B214-311F790C7D41}
 		{BAD41D41-9B6F-4FCE-ABFF-257BDD42FD9B} = {1D323727-5B35-4681-B214-311F790C7D41}
 		{5C9A4584-7090-4EAE-BA35-388095726D53} = {1D323727-5B35-4681-B214-311F790C7D41}
+		{E5F63CA9-1B51-4081-A2BE-9296FFB3C3DB} = {D07D6DCB-A9DE-466B-B3B7-302D0C698BBB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1C5BC254-7DB4-4737-9738-6C3C019D6131}
