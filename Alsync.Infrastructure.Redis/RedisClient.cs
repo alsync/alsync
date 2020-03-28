@@ -80,5 +80,10 @@ namespace Alsync.Infrastructure.Redis
         {
             return await db.StringGetAsync(key);
         }
+
+        public bool Remove(string key)
+        {
+            return db.KeyDelete(key);
+        }
     }
 }
