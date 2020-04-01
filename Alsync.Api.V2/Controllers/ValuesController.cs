@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Alsync.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,15 @@ namespace Alsync.Api.V2.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            CacheHelper.Remove("name");
+
+            var value = CacheHelper.Get(DateTime.Now.ToString());
+            if (string.IsNullOrEmpty(value))
+            {
+                CacheHelper.Set(DateTime.Now.ToString(), DateTime.Now.Ticks.ToString(), TimeSpan.FromSeconds(25));
+                value = CacheHelper.Get(DateTime.Now.ToString());
+            }
+            return new string[] { "value1", "value2", value };
         }
 
         // GET api/values/5
