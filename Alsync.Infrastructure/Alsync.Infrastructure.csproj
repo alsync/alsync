@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Alsync.Infrastructure.Redis\Alsync.Infrastructure.Redis.csproj" />
+    <ProjectReference Include="..\Alsync.Infrastructure.Caching\Alsync.Infrastructure.Caching.csproj" />
   </ItemGroup>
 
 </Project>

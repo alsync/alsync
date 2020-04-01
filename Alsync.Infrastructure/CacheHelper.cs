@@ -1,4 +1,5 @@
-﻿using Alsync.Infrastructure.Redis;
+﻿using Alsync.Infrastructure.Caching;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,16 +8,22 @@ namespace Alsync.Infrastructure
 {
     public class CacheHelper
     {
-        public bool Set(string key, string value, TimeSpan? expiry = null)
+        private static readonly ICache cache = ServiceLocator.Instance.GetService<ICache>();
+
+        public static void Set(string key, string value, TimeSpan? expiry = null)
         {
-            var flag = RedisClient.Instance.SetString(key, value, expiry);
-            return flag;
+            cache.SetAsync(key, value, expiry);
         }
 
-        public string Get(string key)
+        public static string Get(string key)
         {
-            var result = RedisClient.Instance.GetString(key);
+            var result = cache.Get(key);
             return result;
+        }
+
+        public static void Remove(string key)
+        {
+            cache.Remove(key);
         }
     }
 }
