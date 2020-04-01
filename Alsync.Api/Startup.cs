@@ -2,6 +2,8 @@
 using Alsync.Domain.Repositories;
 using Alsync.Domain.Repositories.EntityFramework;
 using Alsync.IApplication;
+using Alsync.Infrastructure.Caching;
+using Alsync.Infrastructure.Caching.Redis;
 using Alsync.Infrastructure.Mvc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -110,30 +112,27 @@ namespace Alsync.Api
                 options.OperationFilter<HttpHeaderOperationFilter>();
             });
 
-            //var pathToDoc = Configuration["Swagger:FileName"];
-            //services.ConfigureSwaggerGen(options =>
+            //services.AddDistributedRedisCache(options =>
             //{
-            //    options.SwaggerDoc("v1",
-            //        new Info
-            //        {
-            //            Title = "Geo Search API",
-            //            Version = "v1",
-            //            Description = "A simple api to search using geo location in Elasticsearch",
-            //            TermsOfService = "None"
-            //        }
-            //     );
-
-            //    var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, pathToDoc);
-            //    options.IncludeXmlComments(filePath);
-            //    options.DescribeAllEnumsAsStrings();
+            //    options.Configuration = Configuration["Redis:Configuration"];
+            //    options.InstanceName = Configuration["Redis:InstanceName"];
             //});
+            services.AddCache()
+                .AddRedisCache(options =>
+                {
+                    options.Configuration = Configuration["Redis:Configuration"];
+                    options.InstanceName = Configuration["Redis:InstanceName"];
+                });
+
+            var serviceProvider = services.BuildServiceProvider();
+            ServiceLocator.Instance.ConfirgureServiceProvider(serviceProvider);
 
             services.AddMvc(options =>
             {
                 options.Filters.Add(typeof(WebApiExceptionFilterAttribute));
             })
-            .AddApplicationPart(typeof(V1.Controllers.HttpController).Assembly)
-            .AddApplicationPart(typeof(V2.Controllers.HttpController).Assembly);
+                .AddApplicationPart(typeof(V1.Controllers.HttpController).Assembly)
+                .AddApplicationPart(typeof(V2.Controllers.HttpController).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
