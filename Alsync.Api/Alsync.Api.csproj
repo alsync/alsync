@@ -29,6 +29,7 @@
     <ProjectReference Include="..\Alsync.Domain.Repositories\Alsync.Domain.Repositories.csproj" />
     <ProjectReference Include="..\Alsync.IApplication\Alsync.IApplication.csproj" />
     <ProjectReference Include="..\Alsync.Infrastructure.Caching.Redis\Alsync.Infrastructure.Caching.Redis.csproj" />
+    <ProjectReference Include="..\Alsync.Infrastructure.DependencyInjection\Alsync.Infrastructure.DependencyInjection.csproj" />
     <ProjectReference Include="..\Alsync.Infrastructure.Mvc\Alsync.Infrastructure.Mvc.csproj" />
   </ItemGroup>
 

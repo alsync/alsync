@@ -2,8 +2,7 @@
 using Alsync.Domain.Repositories;
 using Alsync.Domain.Repositories.EntityFramework;
 using Alsync.IApplication;
-using Alsync.Infrastructure.Caching;
-using Alsync.Infrastructure.Caching.Redis;
+using Alsync.Infrastructure.DependencyInjection;
 using Alsync.Infrastructure.Mvc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
