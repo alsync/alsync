@@ -7,7 +7,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class RedisExtensions
     {
-        public static CacheBuilder AddRedisCache(this CacheBuilder builder, Action<RedisCacheOptions> setupAction)
+        public static CacheBuilder AddRedis(this CacheBuilder builder, Action<RedisCacheOptions> setupAction)
         {
             if (builder == null)
                 throw new ArgumentNullException(nameof(builder));

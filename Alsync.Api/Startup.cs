@@ -117,7 +117,7 @@ namespace Alsync.Api
             //    options.InstanceName = Configuration["Redis:InstanceName"];
             //});
             services.AddCache()
-                .AddRedisCache(options =>
+                .AddRedis(options =>
                 {
                     options.Configuration = Configuration["Redis:Configuration"];
                     options.InstanceName = Configuration["Redis:InstanceName"];
