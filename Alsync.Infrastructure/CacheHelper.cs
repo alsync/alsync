@@ -1,5 +1,5 @@
 ﻿using Alsync.Infrastructure.Caching;
-using Microsoft.Extensions.DependencyInjection;
+using Alsync.Infrastructure.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;

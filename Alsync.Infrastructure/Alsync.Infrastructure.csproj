@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Alsync.Infrastructure.Caching\Alsync.Infrastructure.Caching.csproj" />
+    <ProjectReference Include="..\Alsync.Infrastructure.DependencyInjection\Alsync.Infrastructure.DependencyInjection.csproj" />
   </ItemGroup>
 
 </Project>
