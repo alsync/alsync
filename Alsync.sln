@@ -37,7 +37,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.Api.V2", "Alsync.Api
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.Infrastructure.Caching", "Alsync.Infrastructure.Caching\Alsync.Infrastructure.Caching.csproj", "{0E9D5911-5B05-4E85-A8E5-8A5DBE1D5170}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsync.Infrastructure.Caching.Redis", "Alsync.Infrastructure.Caching.Redis\Alsync.Infrastructure.Caching.Redis.csproj", "{A3EFB82D-F4F5-43B0-852F-3875DBA28774}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.Infrastructure.Caching.Redis", "Alsync.Infrastructure.Caching.Redis\Alsync.Infrastructure.Caching.Redis.csproj", "{A3EFB82D-F4F5-43B0-852F-3875DBA28774}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsync.Infrastructure.DependencyInjection", "Alsync.Infrastructure.DependencyInjection\Alsync.Infrastructure.DependencyInjection.csproj", "{3E13B0F4-A27E-453E-9B26-D1E66CD33C76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsync.Infrastructure.Caching.Memory", "Alsync.Infrastructure.Caching.Memory\Alsync.Infrastructure.Caching.Memory.csproj", "{B7F43083-B4C9-4384-8A2D-9C05E8F9BA15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +105,14 @@ Global
 		{A3EFB82D-F4F5-43B0-852F-3875DBA28774}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3EFB82D-F4F5-43B0-852F-3875DBA28774}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3EFB82D-F4F5-43B0-852F-3875DBA28774}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E13B0F4-A27E-453E-9B26-D1E66CD33C76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E13B0F4-A27E-453E-9B26-D1E66CD33C76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E13B0F4-A27E-453E-9B26-D1E66CD33C76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E13B0F4-A27E-453E-9B26-D1E66CD33C76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7F43083-B4C9-4384-8A2D-9C05E8F9BA15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7F43083-B4C9-4384-8A2D-9C05E8F9BA15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7F43083-B4C9-4384-8A2D-9C05E8F9BA15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7F43083-B4C9-4384-8A2D-9C05E8F9BA15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -120,6 +132,8 @@ Global
 		{5C9A4584-7090-4EAE-BA35-388095726D53} = {1D323727-5B35-4681-B214-311F790C7D41}
 		{0E9D5911-5B05-4E85-A8E5-8A5DBE1D5170} = {D07D6DCB-A9DE-466B-B3B7-302D0C698BBB}
 		{A3EFB82D-F4F5-43B0-852F-3875DBA28774} = {D07D6DCB-A9DE-466B-B3B7-302D0C698BBB}
+		{3E13B0F4-A27E-453E-9B26-D1E66CD33C76} = {D07D6DCB-A9DE-466B-B3B7-302D0C698BBB}
+		{B7F43083-B4C9-4384-8A2D-9C05E8F9BA15} = {D07D6DCB-A9DE-466B-B3B7-302D0C698BBB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1C5BC254-7DB4-4737-9738-6C3C019D6131}
