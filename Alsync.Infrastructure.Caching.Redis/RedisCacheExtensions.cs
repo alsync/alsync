@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.Caching.Redis;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Alsync.Infrastructure.Caching;
+using Alsync.Infrastructure.Caching.Redis;
+using Microsoft.Extensions.Caching.Redis;
 using System;
 
-namespace Alsync.Infrastructure.Caching.Redis
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class RedisCacheExtensions
     {

@@ -1,9 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Alsync.Infrastructure.Caching;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alsync.Infrastructure.Caching
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class CacheServiceCollectionExtensions
     {
