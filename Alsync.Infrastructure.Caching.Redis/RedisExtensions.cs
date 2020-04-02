@@ -5,7 +5,7 @@ using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class RedisCacheExtensions
+    public static class RedisExtensions
     {
         public static CacheBuilder AddRedisCache(this CacheBuilder builder, Action<RedisCacheOptions> setupAction)
         {
