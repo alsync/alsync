@@ -1,0 +1,12 @@
+﻿@page
+@model Alsync.Web.Pages.FollowModel
+@{
+    ViewData["Title"] = "Follow";
+}
+
+<h1>Follow</h1>
+
+<form asp-page-handler="test">
+    <input type="text" asp-for="Name" />
+    <button type="submit" asp-page-handler="test">test</button>
+</form>
