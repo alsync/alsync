@@ -7,13 +7,20 @@ using System.Text;
 
 namespace Alsync.Domain.Repositories.EntityFramework.EntityTypeConfigurations
 {
-    public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
+    public class UserEntityTypeConfiguration : EntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public override void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasKey(m => m.ID);
-            builder.Property(m => m.RowVersion)
+            builder.Property(m => m.UserName)
+                .HasMaxLength(100)
                 .IsRequired();
+            builder.Property("Password")
+                .HasMaxLength(100)
+                .IsRequired();
+
+            builder.OwnsOne(m => m.FullName, o => o.ToTable("UserFullName"));
+
+            base.Configure(builder);
         }
     }
 }

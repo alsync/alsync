@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Alsync.Domain.Repositories.EntityFramework.EntityTypeConfigurations
 {
-    public class UserProfileEntityTypeConfiguration : IEntityTypeConfiguration<UserProfile>
+    public class UserProfileEntityTypeConfiguration : EntityTypeConfiguration<UserProfile>
     {
-        public void Configure(EntityTypeBuilder<UserProfile> builder)
+        public override void Configure(EntityTypeBuilder<UserProfile> builder)
         {
             builder.HasKey(m => m.ID);
             builder.Property(m => m.Name)
@@ -18,9 +18,11 @@ namespace Alsync.Domain.Repositories.EntityFramework.EntityTypeConfigurations
             builder.Property(m => m.Address)
                 .HasMaxLength(50);
 
-            builder.HasMany(m => m.Phones)
+            builder.HasMany(m => m.Contacts)
                 .WithOne(m => m.Profile)
                 .HasForeignKey(m => m.ProfileID);
+
+            base.Configure(builder);
         }
     }
 }

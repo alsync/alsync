@@ -7,11 +7,10 @@ using System.Text;
 
 namespace Alsync.Domain.Repositories.EntityFramework.EntityTypeConfigurations
 {
-    public class ContactEntityTypeConfiguration : IEntityTypeConfiguration<Contact>
+    public class ContactEntityTypeConfiguration : EntityTypeConfiguration<Contact>
     {
-        public void Configure(EntityTypeBuilder<Contact> builder)
+        public override void Configure(EntityTypeBuilder<Contact> builder)
         {
-            builder.HasKey(m => m.ID);
             builder.Property(m => m.Label)
                 .HasMaxLength(20)
                 .IsRequired();
@@ -20,8 +19,10 @@ namespace Alsync.Domain.Repositories.EntityFramework.EntityTypeConfigurations
                 .IsRequired();
 
             builder.HasOne(m => m.Profile)
-                .WithMany(m => m.Phones)
+                .WithMany(m => m.Contacts)
                 .HasForeignKey(m => m.ProfileID);
+
+            base.Configure(builder);
         }
     }
 }
