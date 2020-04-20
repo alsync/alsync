@@ -39,7 +39,8 @@ namespace Alsync.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AlsyncDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<AlsyncDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AlsyncDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -99,12 +100,12 @@ namespace Alsync.Api
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Alsync Api"
+                    Title = "Alsync Api v1 docs"
                 });
                 options.SwaggerDoc("v2", new OpenApiInfo
                 {
                     Version = "v2",
-                    Title = "Alsync Api"
+                    Title = "Alsync Api v2 docs"
                 });
                 Directory.GetFiles(AppContext.BaseDirectory, "*.xml").ToList().ForEach(p => options.IncludeXmlComments(p));
 
