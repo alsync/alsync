@@ -20,12 +20,18 @@ namespace Alsync.Infrastructure.Mvc
                 {
                     var result = new HttpResult { Result = false, Message = exception.Message };
                     context.Result = new JsonResult(result);
+                }
+                else
+                {
+                    //var result = new HttpResult { Result = false, Message = exception.Message };
+                    //context.Result = new JsonResult(result);
 
-                    context.HttpContext.Response.ContentType = "application/json";
-                    await context.HttpContext.Response.WriteAsync("Status code page, status code: " + context.HttpContext.Response.StatusCode);
+                    //context.HttpContext.Response.ContentType = "application/json";
+                    //await context.HttpContext.Response.WriteAsync("Status code page, status code: " + context.HttpContext.Response.StatusCode);
                 }
             }
-            //await base.OnExceptionAsync(context);
+            //context.ExceptionHandled = true;
+            await base.OnExceptionAsync(context);
         }
     }
 }
