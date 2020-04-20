@@ -15,12 +15,7 @@ namespace Alsync.Domain.Models
 
         public string Password { get; private set; }
 
-        /// <summary>
-        /// 获取或设置行版本。
-        /// </summary>
-        public byte[] RowVersion { get; protected set; }
-
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; private set; }
 
         public void Login(string account, string password)
         {
@@ -37,7 +32,7 @@ namespace Alsync.Domain.Models
             }
             else
             {
-                throw new ValidationException("用户名或者密码错误。");
+                throw new ValidationException("账号或者密码错误。");
             }
         }
     }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alsync.Domain.Models
 {
-    public class Contact : Entity<Guid>
+    public class Contact : Entity
     {
         public Contact() { }
 
@@ -19,7 +19,7 @@ namespace Alsync.Domain.Models
         /// </summary>
         public byte[] RowVersion { get; protected set; }
 
-        public DateTime CreateDate => DateTime.Now;
+        public DateTime CreateDate { get; protected set; }
 
         public virtual UserProfile Profile { get; protected set; }
     }

@@ -31,7 +31,7 @@ namespace Alsync.Domain.Models
         public FullName(string firstName, string middleName, string lastName)
             : this(firstName, lastName)
         {
-            this.LastName = lastName;
+            this.MiddleName = middleName;
         }
 
         #endregion

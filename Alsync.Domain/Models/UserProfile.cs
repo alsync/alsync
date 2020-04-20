@@ -11,26 +11,28 @@ namespace Alsync.Domain.Models
     {
         public UserProfile()
         {
+
         }
 
-        public string Name { get; protected set; }
+        public UserProfile(string name)
+        {
+            this.Name = name;
+            this.CreateDate = DateTime.Now;
+        }
 
-        public string Avatar { get; protected set; }
+        public string Name { get; private set; }
 
-        public UserGender Gender { get; protected set; }
+        public string Avatar { get; private set; }
 
-        public string Company { get; protected set; }
+        public UserGender Gender { get; private set; }
 
-        public string Address { get; protected set; }
+        public string Company { get; private set; }
 
-        /// <summary>
-        /// 获取或设置行版本。
-        /// </summary>
-        public byte[] RowVersion { get; protected set; }
+        public string Address { get; private set; }
 
-        public DateTime CreateDate => DateTime.Now;
+        public DateTime CreateDate { get; private set; }
 
-        public virtual IList<Contact> Phones { get; protected set; }
+        public virtual IList<Contact> Contacts { get; private set; }
     }
 
     public enum UserGender

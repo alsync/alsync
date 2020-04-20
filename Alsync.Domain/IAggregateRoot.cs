@@ -9,5 +9,9 @@ namespace Alsync.Domain
     /// </summary>
     public interface IAggregateRoot : IEntity<Guid>
     {
+        /// <summary>
+        /// 获取或设置行版本。
+        /// </summary>
+        byte[] RowVersion { get; }
     }
 }
