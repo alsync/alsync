@@ -23,11 +23,13 @@ namespace Alsync.Api.Controllers
         /// <summary>
         /// 登录。
         /// </summary>
+        /// <param name="account">登录账号</param>
+        /// <param name="password">登录密码</param>
         /// <returns></returns>
         [HttpPost("signin")]
-        public void SignIn()
+        public void SignIn(string account, string password)
         {
-            this._userService.Login("abc", "abc");
+            this._userService.Login(account, password);
         }
 
         /// <summary>
