@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Alsync.Api
 {
-    public class HttpHeaderOperationFilter : IOperationFilter
+    public class AuthorizeOperationFilter : IOperationFilter
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
@@ -21,14 +21,21 @@ namespace Alsync.Api
                 .OfType<AllowAnonymousAttribute>();
             if (attributes.Any() && !allowAnonymous.Any())
             {
-                var parameter = new OpenApiParameter
-                {
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Description = "Access Token",
-                    Required = true
+                //.net core 2.0
+                //var parameter = new OpenApiParameter
+                //{
+                //    Name = "Authorization",
+                //    In = ParameterLocation.Header,
+                //    Description = "Access Token",
+                //    Required = true
+                //};
+                //operation.Parameters.Add(parameter);
+
+                //.net core 3.1
+                var jwtBearerScheme = new OpenApiSecurityScheme { Reference = new OpenApiReference { Id = "Bearer", Type = ReferenceType.SecurityScheme } };
+                operation.Security = new List<OpenApiSecurityRequirement> {
+                    new OpenApiSecurityRequirement { [jwtBearerScheme] = Array.Empty<string>() }
                 };
-                operation.Parameters.Add(parameter);
             }
         }
     }

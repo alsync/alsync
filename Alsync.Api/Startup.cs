@@ -109,7 +109,19 @@ namespace Alsync.Api
                 });
                 Directory.GetFiles(AppContext.BaseDirectory, "*.xml").ToList().ForEach(p => options.IncludeXmlComments(p));
 
-                options.OperationFilter<HttpHeaderOperationFilter>();
+                // Add security definitions
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "Please enter into field the word 'Bearer' followed by a space and the JWT value",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                options.OperationFilter<AuthorizeOperationFilter>();
+                //Use below code to replace AuthorizeOperationFilter.
+                //var jwtBearerScheme = new OpenApiSecurityScheme { Reference = new OpenApiReference { Id = "Bearer", Type = ReferenceType.SecurityScheme } };
+                //options.AddSecurityRequirement(new OpenApiSecurityRequirement { [jwtBearerScheme] = Array.Empty<string>() });
             });
 
             //services.AddDistributedRedisCache(options =>
