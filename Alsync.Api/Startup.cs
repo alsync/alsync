@@ -52,48 +52,48 @@ namespace Alsync.Api
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(options =>
-            {
-                //JwtBearer认证中，默认是通过Http的Authorization头来获取的，这也是最推荐的做法，但是在某些场景下，我们可能会使用Url或者是Cookie来传递Token
-                //http://www.cnblogs.com/RainingNight/p/jwtbearer-authentication-in-asp-net-core.html#自定义token获取方式
-                options.Events = new JwtBearerEvents
+                .AddJwtBearer(options =>
                 {
-                    OnMessageReceived = async context =>
+                    //JwtBearer认证中，默认是通过Http的Authorization头来获取的，这也是最推荐的做法，但是在某些场景下，我们可能会使用Url或者是Cookie来传递Token
+                    //http://www.cnblogs.com/RainingNight/p/jwtbearer-authentication-in-asp-net-core.html#自定义token获取方式
+                    options.Events = new JwtBearerEvents
                     {
-                        context.Token = context.Request.Query["access_token"];
-                        await Task.CompletedTask;
-                    }
-                };
-                //JwtBearer认证配置
-                var key = Encoding.UTF8.GetBytes(payloadConfig["Secret"]);
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidIssuer = payloadConfig["iss"],
-                    ValidAudience = payloadConfig["aud"],
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                };
-            })
-            .AddJwtBearer("Admin", options =>
-            {
-                //JwtBearer认证中，默认是通过Http的Authorization头来获取的，这也是最推荐的做法，但是在某些场景下，我们可能会使用Url或者是Cookie来传递Token
-                //http://www.cnblogs.com/RainingNight/p/jwtbearer-authentication-in-asp-net-core.html#自定义token获取方式
-                options.Events = new JwtBearerEvents
-                {
-                    OnMessageReceived = async context =>
+                        OnMessageReceived = async context =>
+                        {
+                            context.Token = context.Request.Query["access_token"];
+                            await Task.CompletedTask;
+                        }
+                    };
+                    //JwtBearer认证配置
+                    var key = Encoding.UTF8.GetBytes(payloadConfig["Secret"]);
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        context.Token = context.Request.Query["access_token"];
-                        await Task.CompletedTask;
-                    }
-                };
-                //JwtBearer认证配置
-                var key = Encoding.UTF8.GetBytes(payloadConfig["Secret"]);
-                options.TokenValidationParameters = new TokenValidationParameters
+                        ValidIssuer = payloadConfig["iss"],
+                        ValidAudience = payloadConfig["aud"],
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                    };
+                })
+                .AddJwtBearer("Admin", options =>
                 {
-                    ValidIssuer = payloadConfig["iss"],
-                    ValidAudience = payloadConfig["aud"],
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                };
-            });
+                    //JwtBearer认证中，默认是通过Http的Authorization头来获取的，这也是最推荐的做法，但是在某些场景下，我们可能会使用Url或者是Cookie来传递Token
+                    //http://www.cnblogs.com/RainingNight/p/jwtbearer-authentication-in-asp-net-core.html#自定义token获取方式
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = async context =>
+                        {
+                            context.Token = context.Request.Query["access_token"];
+                            await Task.CompletedTask;
+                        }
+                    };
+                    //JwtBearer认证配置
+                    var key = Encoding.UTF8.GetBytes(payloadConfig["Secret"]);
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = payloadConfig["iss"],
+                        ValidAudience = payloadConfig["aud"],
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                    };
+                });
 
             services.AddSwaggerGen(options =>
             {
@@ -153,6 +153,8 @@ namespace Alsync.Api
             app.UseStatusCodePages();
 
             app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
