@@ -130,6 +130,7 @@ namespace Alsync.Api
             services.AddMvc(options =>
             {
                 options.Filters.Add(typeof(WebApiExceptionFilterAttribute));
+                options.Filters.Add(typeof(WebApiActionFilterAttribute));
             })
                 .AddApplicationPart(typeof(V1.Controllers.HttpController).Assembly)
                 .AddApplicationPart(typeof(V2.Controllers.HttpController).Assembly);
