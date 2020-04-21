@@ -1,5 +1,4 @@
 ﻿using Alsync.IApplication;
-using Alsync.Infrastructure.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,13 +25,9 @@ namespace Alsync.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("signin")]
-        public HttpResult SignIn()
+        public void SignIn()
         {
             this._userService.Login("abc", "abc");
-            return new HttpResult
-            {
-                Result = true
-            };
         }
 
         /// <summary>
@@ -41,13 +36,9 @@ namespace Alsync.Api.Controllers
         /// <returns></returns>
         [Authorize]
         [HttpGet("signout")]
-        public HttpResult SignOut()
+        public void SignOut()
         {
             this._userService.Login("abc", "abc");
-            return new HttpResult
-            {
-                Result = true
-            };
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Alsync.Infrastructure.Results;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +28,7 @@ namespace Alsync.Api.V2.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public HttpResult Authentication()
+        public dynamic Authentication()
         {
             //return Unauthorized();
             var payloadConfig = this.Configuration.GetSection("Jwt").GetSection("Payload");
@@ -65,7 +64,7 @@ namespace Alsync.Api.V2.Controllers
                 expires: expiresAt,
                 signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature));
             var access_token = tokenHandler.WriteToken(jwtToken);
-            return new HttpResult<dynamic>
+            return new
             {
                 Result = true,
                 Data = new

@@ -1,5 +1,4 @@
-﻿using Alsync.Infrastructure.Results;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,12 +16,8 @@ namespace Alsync.Api.V2.Controllers
         /// <returns></returns>
         [Authorize(AuthenticationSchemes = "Admin")]
         [HttpGet("signout")]
-        public HttpResult SignOut()
+        public void SignOut()
         {
-            return new HttpResult
-            {
-                Result = true
-            };
         }
     }
 }

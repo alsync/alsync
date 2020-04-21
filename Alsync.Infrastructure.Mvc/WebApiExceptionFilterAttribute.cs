@@ -1,5 +1,4 @@
 ﻿using Alsync.Infrastructure.Exceptions;
-using Alsync.Infrastructure.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -18,12 +17,12 @@ namespace Alsync.Infrastructure.Mvc
             {
                 if (exception is ValidationException)
                 {
-                    var result = new HttpResult { Result = false, Message = exception.Message };
+                    var result = new { Result = false, Message = exception.Message };
                     context.Result = new JsonResult(result);
                 }
                 else
                 {
-                    //var result = new HttpResult { Result = false, Message = exception.Message };
+                    //var result = new { Result = false, Message = exception.Message };
                     //context.Result = new JsonResult(result);
 
                     //context.HttpContext.Response.ContentType = "application/json";
