@@ -14,11 +14,28 @@ namespace Alsync.Domain.Repositories.EntityFramework.EntityTypeConfigurations
             builder.Property(m => m.UserName)
                 .HasMaxLength(100)
                 .IsRequired();
-            builder.Property("Password")
+            builder.Property(m => m.Password)
                 .HasMaxLength(100)
                 .IsRequired();
+            builder.Property(m => m.RowVersion)
+                .IsRowVersion()
+                .IsRequired();
 
-            builder.OwnsOne(m => m.FullName, o => o.ToTable("UserFullName"));
+            builder.OwnsOne(m => m.FullName, o =>
+            {
+                //o.ToTable("UserFullName");
+                o.Property(p => p.FirstName)
+                    .HasColumnName(nameof(FullName.FirstName))
+                    .HasMaxLength(20);
+                o.Property(p => p.MiddleName)
+                    .HasColumnName(nameof(FullName.MiddleName))
+                    .HasMaxLength(20);
+                o.Property(p => p.LastName)
+                    .HasColumnName(nameof(FullName.LastName))
+                    .HasMaxLength(20);
+            });
+            builder.HasIndex(m => m.UserName)
+                .IsUnique();
 
             base.Configure(builder);
         }
