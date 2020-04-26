@@ -9,7 +9,7 @@ namespace Alsync.Domain.Models
     /// </summary>
     public class UserProfile : AggregateRoot
     {
-        public UserProfile()
+        protected UserProfile()
         {
 
         }
