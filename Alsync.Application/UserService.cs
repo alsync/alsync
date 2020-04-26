@@ -33,11 +33,11 @@ namespace Alsync.Application
 
             var encryptPassword = EncryptHelper.MD5Hash(password);
             if (ar == null)
-            //    throw new ValidationException("登录账号不存在。");
             {
-                ar = new Domain.Models.User(account, encryptPassword);
-                this.userRepository.Create(ar);
-                base.Context.Commit();
+                throw new ValidationException("登录账号不存在。");
+                //ar = new Domain.Models.User(account, encryptPassword);
+                //this.userRepository.Create(ar);
+                //base.Context.Commit();
             }
 
             ar.Login(account, encryptPassword);
