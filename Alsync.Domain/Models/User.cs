@@ -8,6 +8,7 @@ namespace Alsync.Domain.Models
     public class User : AggregateRoot
     {
         public User(string userName, string password)
+            : base()
         {
             this.UserName = userName;
             this.Password = password;
