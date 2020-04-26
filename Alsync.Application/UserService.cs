@@ -5,6 +5,7 @@ using System.Text;
 using Alsync.Domain.Repositories;
 using Alsync.Infrastructure.Exceptions;
 using System.Linq;
+using Alsync.Infrastructure;
 
 namespace Alsync.Application
 {
@@ -20,19 +21,26 @@ namespace Alsync.Application
             this.userRepository = userRepository;
         }
 
-        public void Login(string userName, string password)
+        public void Login(string account, string password)
         {
-            if (string.IsNullOrEmpty(userName))
+            if (string.IsNullOrEmpty(account))
                 throw new ValidationException("登录账号不能为空。");
             if (string.IsNullOrEmpty(password))
                 throw new ValidationException("登录密码不能为空。");
 
             var ar = this.userRepository.FindAll()
-                .FirstOrDefault(m => m.UserName == userName);
+                .FirstOrDefault(m => m.UserName == account);
+
+            var encryptPassword = EncryptHelper.MD5Hash(password);
             if (ar == null)
-                throw new ValidationException("登录账号不存在。");
-            //var encryptPassword = HashEncrypt.MD5EncryptText(password);
-            ar.Login(userName, password);
+            //    throw new ValidationException("登录账号不存在。");
+            {
+                ar = new Domain.Models.User(account, encryptPassword);
+                this.userRepository.Create(ar);
+                base.Context.Commit();
+            }
+
+            ar.Login(account, encryptPassword);
             this.userRepository.Modify(ar);
             base.Context.Commit();
         }
