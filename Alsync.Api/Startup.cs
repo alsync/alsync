@@ -42,9 +42,33 @@ namespace Alsync.Api
             //services.AddDbContext<AlsyncDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<AlsyncDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IRepositoryContext, AlsyncRepositoryContext>();
+            var appServices = from m in Assembly.GetAssembly(typeof(ApplicationService)).GetTypes()
+                              where m.IsClass && m.IsSubclassOf(typeof(ApplicationService))
+                              select m;
+            foreach (var service in appServices)
+            {
+                var iAppServiceTypes = service.GetInterfaces();
+                foreach (var iService in iAppServiceTypes)
+                {
+                    services.AddScoped(iService, service);
+                }
+            }
+            var repositories = from m in Assembly.GetAssembly(typeof(RepositoryBase<>)).GetTypes()
+                               where m.IsClass
+                               && (m.BaseType?.IsGenericType ?? false)
+                               && m.BaseType.GetGenericTypeDefinition() == typeof(RepositoryBase<>)
+                               select m;
+            foreach (var repository in repositories)
+            {
+                var iRepositoryTypes = repository.GetInterfaces();
+                foreach (var iRepository in iRepositoryTypes)
+                {
+                    services.AddScoped(iRepository, repository);
+                }
+            }
+            //services.AddScoped<IUserService, UserService>();
+            //services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRepositoryContext, AlsyncRepositoryContext>(m => m.GetRequiredService<AlsyncRepositoryContext>());
 
             var payloadConfig = this.Configuration.GetSection("Jwt").GetSection("Payload");
             services.AddAuthentication(options =>
