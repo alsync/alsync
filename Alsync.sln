@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Domain", "03-Domain", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Infrastructure", "04-Infrastructure", "{D07D6DCB-A9DE-466B-B3B7-302D0C698BBB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.Infrastructure.Repositories", "Alsync.Infrastructure.Repositories\Alsync.Infrastructure.Repositories.csproj", "{01D4A38A-FDF9-4EBB-B3F1-009014F5F05A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.Domain", "Alsync.Domain\Alsync.Domain.csproj", "{0B86C44D-053C-47C6-9FE6-47AD2FAF0039}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.Api", "Alsync.Api\Alsync.Api.csproj", "{1443F660-A13F-4A96-BDBC-4F42C1EDAD36}"
@@ -37,11 +35,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.Infrastructure.Cachi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.Infrastructure.Caching.Redis", "Alsync.Infrastructure.Caching.Redis\Alsync.Infrastructure.Caching.Redis.csproj", "{A3EFB82D-F4F5-43B0-852F-3875DBA28774}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsync.Infrastructure.DependencyInjection", "Alsync.Infrastructure.DependencyInjection\Alsync.Infrastructure.DependencyInjection.csproj", "{3E13B0F4-A27E-453E-9B26-D1E66CD33C76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.Infrastructure.DependencyInjection", "Alsync.Infrastructure.DependencyInjection\Alsync.Infrastructure.DependencyInjection.csproj", "{3E13B0F4-A27E-453E-9B26-D1E66CD33C76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsync.Infrastructure.Caching.Memory", "Alsync.Infrastructure.Caching.Memory\Alsync.Infrastructure.Caching.Memory.csproj", "{B7F43083-B4C9-4384-8A2D-9C05E8F9BA15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.Infrastructure.Caching.Memory", "Alsync.Infrastructure.Caching.Memory\Alsync.Infrastructure.Caching.Memory.csproj", "{B7F43083-B4C9-4384-8A2D-9C05E8F9BA15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsync.Web", "Alsync.Web\Alsync.Web.csproj", "{1FDD7322-A514-4AE4-813F-2B5E87E65CB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.Web", "Alsync.Web\Alsync.Web.csproj", "{1FDD7322-A514-4AE4-813F-2B5E87E65CB8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsync.WebUI", "Alsync.WebUI\Alsync.WebUI.csproj", "{92B9D01D-FE42-4DC4-B82E-F9BECE53B35B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,10 +49,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{01D4A38A-FDF9-4EBB-B3F1-009014F5F05A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01D4A38A-FDF9-4EBB-B3F1-009014F5F05A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01D4A38A-FDF9-4EBB-B3F1-009014F5F05A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01D4A38A-FDF9-4EBB-B3F1-009014F5F05A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0B86C44D-053C-47C6-9FE6-47AD2FAF0039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0B86C44D-053C-47C6-9FE6-47AD2FAF0039}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B86C44D-053C-47C6-9FE6-47AD2FAF0039}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -113,12 +109,15 @@ Global
 		{1FDD7322-A514-4AE4-813F-2B5E87E65CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FDD7322-A514-4AE4-813F-2B5E87E65CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FDD7322-A514-4AE4-813F-2B5E87E65CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92B9D01D-FE42-4DC4-B82E-F9BECE53B35B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92B9D01D-FE42-4DC4-B82E-F9BECE53B35B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92B9D01D-FE42-4DC4-B82E-F9BECE53B35B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92B9D01D-FE42-4DC4-B82E-F9BECE53B35B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{01D4A38A-FDF9-4EBB-B3F1-009014F5F05A} = {D07D6DCB-A9DE-466B-B3B7-302D0C698BBB}
 		{0B86C44D-053C-47C6-9FE6-47AD2FAF0039} = {ECF3AA7D-5790-403E-B9E6-5E59578073C9}
 		{1443F660-A13F-4A96-BDBC-4F42C1EDAD36} = {1D323727-5B35-4681-B214-311F790C7D41}
 		{478621E4-B9D4-49FE-8F5A-0B82B36B0676} = {D07D6DCB-A9DE-466B-B3B7-302D0C698BBB}
@@ -134,6 +133,7 @@ Global
 		{3E13B0F4-A27E-453E-9B26-D1E66CD33C76} = {D07D6DCB-A9DE-466B-B3B7-302D0C698BBB}
 		{B7F43083-B4C9-4384-8A2D-9C05E8F9BA15} = {D07D6DCB-A9DE-466B-B3B7-302D0C698BBB}
 		{1FDD7322-A514-4AE4-813F-2B5E87E65CB8} = {1D323727-5B35-4681-B214-311F790C7D41}
+		{92B9D01D-FE42-4DC4-B82E-F9BECE53B35B} = {1D323727-5B35-4681-B214-311F790C7D41}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1C5BC254-7DB4-4737-9738-6C3C019D6131}
