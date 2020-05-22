@@ -6,10 +6,10 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["./Alsync.Web.csproj", "./"]
-RUN dotnet restore "./Alsync.Web.csproj"
+COPY ["Alsync.Web/Alsync.Web.csproj", "Alsync.Web/"]
+RUN dotnet restore "Alsync.Web/Alsync.Web.csproj"
 COPY . .
-WORKDIR "/src"
+WORKDIR "/src/Alsync.Web"
 RUN dotnet build "Alsync.Web.csproj" -c Release -o /app/build
 
 FROM build AS publish

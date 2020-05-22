@@ -4,16 +4,16 @@ services:
   alsync.web:
     image: alsync.web
     build:
-      context: ./Alsync.Web
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./Alsync.Web/Dockerfile
     ports:
       - "5000:80"
     container_name: alsync.web
   alsync.api:
     image: alsync.api
     build:
-      context: ./Alsync.Api
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./Alsync.Api/Dockerfile
     ports:
       - "5001:80"
     container_name: alsync.api

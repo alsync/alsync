@@ -6,8 +6,8 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["./Alsync.Api.csproj", "./"]
-COPY ["../Alsync.Domain.Repositories/Alsync.Domain.Repositories.csproj", "../Alsync.Domain.Repositories/"]
+COPY ["Alsync.Api/Alsync.Api.csproj", "Alsync.Api/"]
+COPY ["Alsync.Domain.Repositories/Alsync.Domain.Repositories.csproj", "Alsync.Domain.Repositories/"]
 COPY ["Alsync.Domain/Alsync.Domain.csproj", "Alsync.Domain/"]
 COPY ["Alsync.Infrastructure/Alsync.Infrastructure.csproj", "Alsync.Infrastructure/"]
 COPY ["Alsync.Infrastructure.Caching/Alsync.Infrastructure.Caching.csproj", "Alsync.Infrastructure.Caching/"]
@@ -18,9 +18,9 @@ COPY ["Alsync.Application/Alsync.Application.csproj", "Alsync.Application/"]
 COPY ["Alsync.Api.V1/Alsync.Api.V1.csproj", "Alsync.Api.V1/"]
 COPY ["Alsync.Infrastructure.Mvc/Alsync.Infrastructure.Mvc.csproj", "Alsync.Infrastructure.Mvc/"]
 COPY ["Alsync.Api.V2/Alsync.Api.V2.csproj", "Alsync.Api.V2/"]
-RUN dotnet restore "./Alsync.Api.csproj"
+RUN dotnet restore "Alsync.Api/Alsync.Api.csproj"
 COPY . .
-WORKDIR "/src"
+WORKDIR "/src/Alsync.Api"
 RUN dotnet build "Alsync.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
