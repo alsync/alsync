@@ -6,6 +6,14 @@ services:
     build:
       context: ./Alsync.Web
       dockerfile: Dockerfile
-    ports: 
+    ports:
       - "5000:80"
     container_name: alsync.web
+  alsync.api:
+    image: alsync.api
+    build:
+      context: ./Alsync.Api
+      dockerfile: Dockerfile
+    ports:
+      - "5001:80"
+    container_name: alsync.api
