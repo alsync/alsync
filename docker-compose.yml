@@ -9,11 +9,11 @@ services:
     ports:
       - "5000:80"
     container_name: alsync.web
-  # alsync.api:
-  #   image: alsync.api
-  #   build:
-  #     context: .
-  #     dockerfile: ./Alsync.Api/Dockerfile
-  #   ports:
-  #     - "5001:80"
-  #   container_name: alsync.api
+  alsync.api:
+    image: alsync.api
+    build:
+      context: .
+      dockerfile: ./Alsync.Api/Dockerfile
+    ports:
+      - "5001:80"
+    container_name: alsync.api
