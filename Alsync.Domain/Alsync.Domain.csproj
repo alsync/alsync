@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Alsync.Infrastructure\Alsync.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
