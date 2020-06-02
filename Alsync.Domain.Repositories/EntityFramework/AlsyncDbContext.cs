@@ -41,7 +41,8 @@ namespace Alsync.Domain.Repositories.EntityFramework
                 .GetEntityTypes()
                 .SelectMany(m => m.GetProperties());
 
-            var rowVersionProperties = keyProperties.Where(m => m.ClrType == typeof(byte[]) && m.Name == "RowVersion");
+            var rowVersionProperties = keyProperties.Where(
+                m => m.ClrType == typeof(byte[]) && m.Name == "RowVersion");
             foreach (var item in rowVersionProperties)
             {
                 modelBuilder.Entity(item.DeclaringEntityType.Name)
