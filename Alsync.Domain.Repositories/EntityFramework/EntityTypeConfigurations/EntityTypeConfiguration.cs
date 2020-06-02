@@ -13,12 +13,6 @@ namespace Alsync.Domain.Repositories.EntityFramework.EntityTypeConfigurations
         public virtual void Configure(EntityTypeBuilder<TEntity> builder)
         {
             builder.HasKey(m => m.ID);
-
-            //builder.Property("RowVersion")
-            //    .IsRowVersion()
-            //    .IsRequired();
-            //builder.Property("DateTime")
-            //    .HasColumnType("DateTime2");
         }
 
         public void Configure(ModelBuilder modelBuilder)

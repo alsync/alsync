@@ -17,9 +17,6 @@ namespace Alsync.Domain.Repositories.EntityFramework.EntityTypeConfigurations
             builder.Property(m => m.Password)
                 .HasMaxLength(100)
                 .IsRequired();
-            builder.Property(m => m.RowVersion)
-                .IsRowVersion()
-                .IsRequired();
 
             builder.OwnsOne(m => m.FullName, o =>
             {
