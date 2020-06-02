@@ -1,4 +1,5 @@
-﻿using Alsync.IApplication;
+﻿using Alsync.Api.Models;
+using Alsync.IApplication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,13 +24,12 @@ namespace Alsync.Api.Controllers
         /// <summary>
         /// 登录。
         /// </summary>
-        /// <param name="account">登录账号</param>
-        /// <param name="password">登录密码</param>
+        /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost("signin")]
-        public void SignIn(string account, string password)
+        public void SignIn([FromBody] AccountModel model)
         {
-            this._userService.Login(account, password);
+            this._userService.Login(model.Account, model.Password);
         }
 
         /// <summary>
