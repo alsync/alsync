@@ -12,11 +12,6 @@ namespace Alsync.Domain.Models
 
         public string Phone { get; protected set; }
 
-        /// <summary>
-        /// 获取或设置行版本。
-        /// </summary>
-        public byte[] RowVersion { get; protected set; }
-
         public DateTime CreateDate { get; protected set; }
 
         public Guid ProfileID { get; protected set; }
