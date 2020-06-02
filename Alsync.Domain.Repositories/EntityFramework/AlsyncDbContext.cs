@@ -13,7 +13,7 @@ namespace Alsync.Domain.Repositories.EntityFramework
         public AlsyncDbContext(DbContextOptions<AlsyncDbContext> options)
             : base(options)
         {
-            this.Database.EnsureCreated();
+            this.Database.EnsureCreatedAsync();
             //this.Database.Migrate();
         }
 
@@ -35,6 +35,28 @@ namespace Alsync.Domain.Repositories.EntityFramework
             //modelBuilder.Properties<DateTime>()
             //    .Configure(m =>
             //        m.HasColumnType("DateTime2"));
+
+            var keyProperties = modelBuilder
+                .Model
+                .GetEntityTypes()
+                .SelectMany(m => m.GetProperties());
+
+            var rowVersionProperties = keyProperties.Where(m => m.ClrType == typeof(byte[]) && m.Name == "RowVersion");
+            foreach (var item in rowVersionProperties)
+            {
+                modelBuilder.Entity(item.DeclaringEntityType.Name)
+                    .Property(item.Name)
+                    .IsRowVersion()
+                    .IsRequired();
+            }
+
+            //var dateTimeProperties = keyProperties.Where(m => m.ClrType == typeof(DateTime));
+            //foreach (var item in dateTimeProperties)
+            //{
+            //    modelBuilder.Entity(item.DeclaringEntityType.Name)
+            //        .Property(item.Name)
+            //        .HasColumnType("DateTime2");
+            //}
 
             base.OnModelCreating(modelBuilder);
         }
