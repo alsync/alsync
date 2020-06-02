@@ -68,7 +68,8 @@ namespace Alsync.Api
             }
             //services.AddScoped<IUserService, UserService>();
             //services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IRepositoryContext, AlsyncRepositoryContext>(m => m.GetRequiredService<AlsyncRepositoryContext>());
+            //services.AddScoped<IRepositoryContext, AlsyncRepositoryContext>(m => m.GetRequiredService<AlsyncRepositoryContext>());
+            services.AddScoped<IRepositoryContext, AlsyncRepositoryContext>();
 
             var payloadConfig = this.Configuration.GetSection("Jwt").GetSection("Payload");
             services.AddAuthentication(options =>
