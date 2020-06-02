@@ -15,8 +15,7 @@ namespace Alsync.Domain.Models
                 return false;
             if (ReferenceEquals(this, obj))
                 return true;
-            var other = obj as ValueObject;
-            if (other == null)
+            if (!(obj is ValueObject))
                 return false;
             var fields = this.GetType().GetFields();
             var objFields = obj.GetType().GetFields();
