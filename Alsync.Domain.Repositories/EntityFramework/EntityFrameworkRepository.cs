@@ -3,14 +3,14 @@ using Alsync.Domain.Repositories.EntityFramework;
 using System;
 using System.Linq;
 
-namespace Alsync.Domain.Repositories
+namespace Alsync.Domain.Repositories.EntityFramework
 {
-    public abstract class RepositoryBase<TEntity> : Repository<TEntity>
+    public abstract class EntityFrameworkRepository<TEntity> : Repository<TEntity>
          where TEntity : class, IAggregateRoot
     {
         public IRepositoryContext Context { get; set; }
 
-        public RepositoryBase(IRepositoryContext context)
+        public EntityFrameworkRepository(IRepositoryContext context)
         {
             if (context is IEntityFrameworkRepositoryContext)
                 this.Context = context as IEntityFrameworkRepositoryContext;

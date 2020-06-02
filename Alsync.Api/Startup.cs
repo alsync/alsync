@@ -53,10 +53,10 @@ namespace Alsync.Api
                     services.AddScoped(iService, service);
                 }
             }
-            var repositories = from m in Assembly.GetAssembly(typeof(RepositoryBase<>)).GetTypes()
+            var repositories = from m in Assembly.GetAssembly(typeof(EntityFrameworkRepository<>)).GetTypes()
                                where m.IsClass
                                && (m.BaseType?.IsGenericType ?? false)
-                               && m.BaseType.GetGenericTypeDefinition() == typeof(RepositoryBase<>)
+                               && m.BaseType.GetGenericTypeDefinition() == typeof(EntityFrameworkRepository<>)
                                select m;
             foreach (var repository in repositories)
             {
