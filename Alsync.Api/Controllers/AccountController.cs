@@ -16,6 +16,10 @@ namespace Alsync.Api.Controllers
     {
         private readonly IUserService _userService;
 
+        /// <summary>
+        /// 初始化 <see cref="AccountController"/> 类的新实例。
+        /// </summary>
+        /// <param name="userService"></param>
         public AccountController(IUserService userService)
         {
             this._userService = userService;
@@ -27,7 +31,7 @@ namespace Alsync.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost("signin")]
-        public void SignIn([FromBody] AccountModel model)
+        public void SignIn([FromBody] SignInViewModel model)
         {
             this._userService.Login(model.Account, model.Password);
         }
