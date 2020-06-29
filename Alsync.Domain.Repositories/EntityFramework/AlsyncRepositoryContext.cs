@@ -7,10 +7,8 @@ namespace Alsync.Domain.Repositories.EntityFramework
 {
     public class AlsyncRepositoryContext : EntityFrameworkRepositoryContext
     {
-        private readonly DbContext context;
+        public override DbContext Context { get; }
 
-        public override DbContext Context => context;
-
-        public AlsyncRepositoryContext(AlsyncDbContext context) => this.context = context;
+        public AlsyncRepositoryContext(AlsyncDbContext context) => this.Context = context;
     }
 }
