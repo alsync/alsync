@@ -19,17 +19,24 @@ namespace Alsync.Domain.Repositories.EntityFramework
 
         public override void Create<TEntity>(TEntity entity)
         {
-            this.Context.Entry(entity).State = EntityState.Added;
+            //this.Context.Entry(entity).State = EntityState.Added;
+            this.Context.Add(entity);
         }
 
         public override void Remove<TEntity>(TEntity entity)
         {
-            this.Context.Entry(entity).State = EntityState.Deleted;
+            //this.Context.Entry(entity).State = EntityState.Deleted;
+            this.Context.Remove(entity);
         }
 
         public override void Modify<TEntity>(TEntity entity)
         {
-            this.Context.Entry(entity).State = EntityState.Modified;
+            //this.Context.Entry(entity).State = EntityState.Modified;
+
+            //this.Context.Attach(entity);
+            //this.Context.Entry(entity).Property(m => m.ID).IsModified = true;
+
+            this.Context.Update(entity);
         }
 
         public override TEntity Find<TEntity, TKey>(TKey id)
