@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alsync.Infrastructure.Mvc
+namespace Alsync.Infrastructure.Mvc.Filters
 {
     public class WebApiActionFilterAttribute : ActionFilterAttribute
     {

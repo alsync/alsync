@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Threading.Tasks;
 
-namespace Alsync.Infrastructure.Mvc
+namespace Alsync.Infrastructure.Mvc.Filters
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class WebApiExceptionFilterAttribute : ExceptionFilterAttribute
