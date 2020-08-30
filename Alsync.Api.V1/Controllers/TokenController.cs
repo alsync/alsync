@@ -66,16 +66,12 @@ namespace Alsync.Api.V1.Controllers
             var access_token = tokenHandler.WriteToken(jwtToken);
             return new
             {
-                Result = true,
-                Data = new
+                access_token,
+                token_type = JwtBearerDefaults.AuthenticationScheme,
+                profile = new
                 {
-                    access_token,
-                    token_type = JwtBearerDefaults.AuthenticationScheme,
-                    profile = new
-                    {
-                        auth_time = new DateTimeOffset(authTime).ToUnixTimeSeconds(),
-                        expires_at = new DateTimeOffset(expiresAt).ToUnixTimeSeconds()
-                    }
+                    auth_time = new DateTimeOffset(authTime).ToUnixTimeSeconds(),
+                    expires_at = new DateTimeOffset(expiresAt).ToUnixTimeSeconds()
                 }
             };
         }
