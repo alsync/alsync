@@ -3,7 +3,8 @@ using Alsync.Domain.Repositories;
 using Alsync.Domain.Repositories.EntityFramework;
 using Alsync.IApplication;
 using Alsync.Infrastructure.DependencyInjection;
-using Alsync.Infrastructure.Mvc;
+using Alsync.Infrastructure.Mvc.Filters;
+using Consul;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,37 +40,7 @@ namespace Alsync.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<AlsyncDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<AlsyncDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-
-            var appServices = from m in Assembly.GetAssembly(typeof(ApplicationService)).GetTypes()
-                              where m.IsClass && m.IsSubclassOf(typeof(ApplicationService))
-                              select m;
-            foreach (var service in appServices)
-            {
-                var iAppServiceTypes = service.GetInterfaces();
-                foreach (var iService in iAppServiceTypes)
-                {
-                    services.AddScoped(iService, service);
-                }
-            }
-            var repositories = from m in Assembly.GetAssembly(typeof(EntityFrameworkRepository<>)).GetTypes()
-                               where m.IsClass
-                               && (m.BaseType?.IsGenericType ?? false)
-                               && m.BaseType.GetGenericTypeDefinition() == typeof(EntityFrameworkRepository<>)
-                               select m;
-            foreach (var repository in repositories)
-            {
-                var iRepositoryTypes = repository.GetInterfaces();
-                foreach (var iRepository in iRepositoryTypes)
-                {
-                    services.AddScoped(iRepository, repository);
-                }
-            }
-            //services.AddScoped<IUserService, UserService>();
-            //services.AddScoped<IUserRepository, UserRepository>();
-            //services.AddScoped<IRepositoryContext, AlsyncRepositoryContext>(m => m.GetRequiredService<AlsyncRepositoryContext>());
-            services.AddScoped<IRepositoryContext, AlsyncRepositoryContext>();
+            services.AddCustomServices(Configuration);
 
             var payloadConfig = this.Configuration.GetSection("Jwt").GetSection("Payload");
             services.AddAuthentication(options =>
@@ -211,6 +182,130 @@ namespace Alsync.Api
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
                     options.SwaggerEndpoint("/swagger/v2/swagger.json", "V2 Docs");
                 });
+
+            app.RegisterConsul(this.Configuration);
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static class AppServiceServiceCollectionExtensions
+    {
+        /// <summary>
+        /// 注入自定义服务。
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="Configuration"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddCustomServices(this IServiceCollection services, IConfiguration Configuration)
+        {
+            services.AddDbContextPool<AlsyncDbContext>(options =>
+            {
+                options.UseLoggerFactory(LoggerFactory.Create(configure =>
+                {
+                    configure.AddConsole();
+                    configure.AddDebug();
+                }))
+                    .UseLazyLoadingProxies()
+                    //.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                    .UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            services.AddAppServices()
+                .AddRepositories();
+
+            services.AddScoped<IRepositoryContext, AlsyncRepositoryContext>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// 注入应用服务。
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddAppServices(this IServiceCollection services)
+        {
+            var appServices = from m in Assembly.GetAssembly(typeof(ApplicationService)).GetTypes()
+                              where m.IsClass && m.IsSubclassOf(typeof(ApplicationService))
+                              select m;
+            foreach (var service in appServices)
+            {
+                var iAppServiceTypes = service.GetInterfaces();
+                foreach (var iService in iAppServiceTypes)
+                {
+                    services.AddScoped(iService, service);
+                }
+            }
+
+            return services;
+        }
+
+        /// <summary>
+        /// 注入仓储服务。
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddRepositories(this IServiceCollection services)
+        {
+            var repositories = from m in Assembly.GetAssembly(typeof(EntityFrameworkRepository<>)).GetTypes()
+                               where m.IsClass
+                               && (m.BaseType?.IsGenericType ?? false)
+                               && m.BaseType.GetGenericTypeDefinition() == typeof(EntityFrameworkRepository<>)
+                               select m;
+            foreach (var repository in repositories)
+            {
+                var iRepositoryTypes = repository.GetInterfaces();
+                foreach (var iRepository in iRepositoryTypes)
+                {
+                    services.AddScoped(iRepository, repository);
+                }
+            }
+
+            return services;
+        }
+    }
+
+    public static class ConsulApplicationBuilderExtensions
+    {
+        public static IApplicationBuilder RegisterConsul(this IApplicationBuilder app, IConfiguration configuration)
+        {
+
+            var client = new ConsulClient(config =>
+            {
+                config.Address = new Uri("http://192.168.222.135:8500");
+                config.Datacenter = "dc1";
+            });
+
+            //register
+            client.Agent.ServiceRegister(new AgentServiceRegistration
+            {
+                ID = Guid.NewGuid().ToString("N"),
+                Name = "alsync",
+                //Address = configuration["ip"],
+                //Port = int.Parse(configuration["port"]),
+                Address = "192.168.222.133",
+                Port = 2617,
+                Check = new AgentServiceCheck
+                {
+                    DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(10),
+                    Interval = TimeSpan.FromSeconds(10),
+                    //HTTP = $"http://{configuration["ip"]}:{configuration["port"]}/api/health",
+                    HTTP = "http://192.168.222.133:2617/api/healthcheck",
+                    Timeout = TimeSpan.FromSeconds(5)
+                }
+            });
+
+            //invoke in another place.
+            var serviceDicts = client.Agent.Services().Result.Response.Where(m => m.Value.Service.Equals("alsync", StringComparison.OrdinalIgnoreCase));
+            foreach (var service in serviceDicts)
+            {
+                //new Uri("").Scheme
+                //service.Value.Address
+            }
+
+            return app;
         }
     }
 }
