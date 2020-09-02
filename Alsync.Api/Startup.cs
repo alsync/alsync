@@ -286,13 +286,13 @@ namespace Alsync.Api
                 //Address = configuration["ip"],
                 //Port = int.Parse(configuration["port"]),
                 Address = "192.168.222.133",
-                Port = 2617,
+                Port = 5001,
                 Check = new AgentServiceCheck
                 {
                     DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(10),
                     Interval = TimeSpan.FromSeconds(10),
                     //HTTP = $"http://{configuration["ip"]}:{configuration["port"]}/api/health",
-                    HTTP = "http://192.168.222.133:2617/api/healthcheck",
+                    HTTP = "http://192.168.222.133:5001/api/healthcheck",
                     Timeout = TimeSpan.FromSeconds(5)
                 }
             });
