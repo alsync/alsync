@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace Alsync.Infrastructure.DependencyInjection
 {
@@ -8,6 +10,9 @@ namespace Alsync.Infrastructure.DependencyInjection
         public static ServiceLocator Instance { get; } = new ServiceLocator();
 
         private IServiceProvider serviceProvider;
+
+        private ServiceLocator() { }
+
         public void ConfirgureServiceProvider(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
@@ -16,6 +21,11 @@ namespace Alsync.Infrastructure.DependencyInjection
         public T GetService<T>()
         {
             return this.serviceProvider.GetRequiredService<T>();
+        }
+
+        public IEnumerable<T> GetServices<T>()
+        {
+            return this.serviceProvider.GetServices<T>();
         }
     }
 }
