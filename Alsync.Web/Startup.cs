@@ -47,7 +47,7 @@ namespace Alsync.Web
             app.UseAntiLeech(options =>
             {
                 options.DefaultImagePath = "/img/default.png";
-                options.Domains.Add("http://localhost:59862/");
+                options.Domains.Add(new Uri("http://localhost:59862/").AbsoluteUri);
             });
 
             app.UseHttpsRedirection();
