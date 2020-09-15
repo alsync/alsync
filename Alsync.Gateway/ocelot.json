@@ -3,6 +3,7 @@
     {
       "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
+      // 采用服务发现方式，取消下游主机与端口设置
       //"DownstreamHostAndPorts": [
       //  {
       //    "Host": "localhost",
@@ -15,6 +16,27 @@
       "ServiceName": "alsync",
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
+      },
+      // 缓存
+      //"FileCacheOptions": {
+      //  "TtlSeconds": 15,
+      //  "Region": "UserCache" //可以调用Api清理
+      //},
+      // 熔断、超时
+      "QoSOptions": {
+        // 熔断配置
+        "ExceptionsAllowedBeforeBreaking": 3, //允许异常请求数
+        "DurationOfBreak": 10000, //熔断的时间，单位为ms
+        // 超时配置
+        "TimeoutValue": 4000 //对下游的请求超过指定时长自动将请求设置为超时，单位为ms，默认90s
+      },
+      // 限流——断路器，全局里可选配置自定义信息
+      "RateLimitOptions": {
+        "ClientWhitelist": [ "alsync", "arytry" ], //客户端白名单无限流限制。httpheader添加节点ClientId=alsync或者ClientId=arytry
+        "EnableRateLimiting": true,
+        "Period": "5s", //1s, 5m, 1h, 1d. 统计时间段
+        "PeriodTimespan": 10, //多少秒之后可重新请求
+        "Limit": 2 //统计时间段内允许的最大请求数量
       }
     }
   ],
@@ -23,6 +45,13 @@
       "Host": "192.168.222.135",
       "Port": 8500,
       "Type": "Consul"
-    }
+    },
+    //// 限流全局配置
+    //"RateLimitOptions": {
+    //  "DisableRateLimitHeaders": false,
+    //  "QuotaExceededMessage": "Too many request, may be later!", //自定义限流后的提示信息
+    //  "HttpStatusCode": 666,
+    //  "ClientIdHeader": "ClientId"
+    //}
   }
 }
