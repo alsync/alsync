@@ -46,7 +46,7 @@ namespace Alsync.Infrastructure.Mvc.Middleware
                 else
                 {
                     var path = Path.Combine(Directory.GetCurrentDirectory(), _options.DefaultImagePath);
-                    var fs = File.OpenRead(path);
+                    using var fs = File.OpenRead(path);
                     var bytes = new byte[fs.Length];
                     await fs.ReadAsync(bytes, 0, bytes.Length);
                     await context.Response.Body.WriteAsync(bytes, 0, bytes.Length);
