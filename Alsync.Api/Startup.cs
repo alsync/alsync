@@ -42,6 +42,18 @@ namespace Alsync.Api
         {
             services.AddCustomServices(Configuration);
 
+            //跨域配置
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyHeader()
+                        .AllowCredentials()
+                        .AllowAnyMethod()
+                        .SetIsOriginAllowed(_ => true);
+                });
+            });
+
             var payloadConfig = this.Configuration.GetSection("Jwt").GetSection("Payload");
             services.AddAuthentication(options =>
             {
@@ -158,6 +170,8 @@ namespace Alsync.Api
 
             app.UseRouting();
 
+            app.UseCors();
+
             app.UseStatusCodePages();
 
             app.UseAuthentication();
@@ -271,7 +285,6 @@ namespace Alsync.Api
     {
         public static IApplicationBuilder RegisterConsul(this IApplicationBuilder app, IConfiguration configuration)
         {
-
             var client = new ConsulClient(config =>
             {
                 config.Address = new Uri("http://192.168.222.135:8500");
