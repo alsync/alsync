@@ -14,6 +14,11 @@ namespace Alsync.Api
     {
         public static void Main(string[] args)
         {
+            //new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddCommandLine(args)
+            //    .Build();
+
             BuildWebHost(args).Run();
         }
 
