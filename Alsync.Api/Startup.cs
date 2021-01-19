@@ -313,8 +313,8 @@ namespace Alsync.Api
                 {
                     DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(10),
                     Interval = TimeSpan.FromSeconds(10),
-                    //HTTP = $"http://{configuration["ip"]}:{configuration["port"]}/api/health",
-                    HTTP = "http://192.168.222.135:8002/liveness",
+                    //HTTP = $"http://{configuration["ip"]}:{configuration["port"]}/liveness",
+                    HTTP = "http://192.168.222.135:8002/api/health",
                     Timeout = TimeSpan.FromSeconds(5)
                 }
             });
