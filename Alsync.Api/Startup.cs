@@ -7,6 +7,7 @@ using Alsync.Infrastructure.Mvc.Filters;
 using Consul;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -53,6 +54,9 @@ namespace Alsync.Api
                         .SetIsOriginAllowed(_ => true);
                 });
             });
+
+            services.AddHealthChecks()
+                .AddCheck("self", _ => new Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult(Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Healthy));
 
             var payloadConfig = this.Configuration.GetSection("Jwt").GetSection("Payload");
             services.AddAuthentication(options =>
@@ -181,6 +185,11 @@ namespace Alsync.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
+                endpoints.MapHealthChecks("/liveness", new HealthCheckOptions
+                {
+                    Predicate = r => r.Name.Contains("self")
+                });
             });
 
             app.UseSwagger(options =>
@@ -298,14 +307,14 @@ namespace Alsync.Api
                 Name = "alsync",
                 //Address = configuration["ip"],
                 //Port = int.Parse(configuration["port"]),
-                Address = "192.168.222.133",
-                Port = 5001,
+                Address = "192.168.222.135",
+                Port = 8002,
                 Check = new AgentServiceCheck
                 {
                     DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(10),
                     Interval = TimeSpan.FromSeconds(10),
                     //HTTP = $"http://{configuration["ip"]}:{configuration["port"]}/api/health",
-                    HTTP = "http://192.168.222.133:5001/api/healthcheck",
+                    HTTP = "http://192.168.222.135:8002/liveness",
                     Timeout = TimeSpan.FromSeconds(5)
                 }
             });
