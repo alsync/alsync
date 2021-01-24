@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Alsync.Api.V2</name>
+    </assembly>
+    <members>
+        <member name="M:Alsync.Api.V2.Controllers.AccountController.SignOut">
+            <summary>
+            注销登录。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Alsync.Api.V2.Controllers.TokenController.Authentication">
+            <summary>
+            JWT授权验证。
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

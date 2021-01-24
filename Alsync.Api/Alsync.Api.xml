@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Alsync.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Alsync.Api.Controllers.AccountController.#ctor(Alsync.IApplication.IUserService)">
+            <summary>
+            初始化 <see cref="T:Alsync.Api.Controllers.AccountController"/> 类的新实例。
+            </summary>
+            <param name="userService"></param>
+        </member>
+        <member name="M:Alsync.Api.Controllers.AccountController.SignIn(Alsync.Api.Models.SignInViewModel)">
+            <summary>
+            登录。
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Alsync.Api.Controllers.AccountController.SignOut">
+            <summary>
+            注销登录。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Alsync.Api.Models.AccountViewModel">
+            <summary>
+            表示账户相关的视图模型。
+            </summary>
+        </member>
+        <member name="T:Alsync.Api.Models.SignInViewModel">
+            <summary>
+            表示登录的视图模型对象。
+            </summary>
+        </member>
+        <member name="P:Alsync.Api.Models.SignInViewModel.Account">
+            <summary>
+            获取或设置登录账号。
+            </summary>
+        </member>
+        <member name="P:Alsync.Api.Models.SignInViewModel.Password">
+            <summary>
+            获取或设置登录密码。
+            </summary>
+        </member>
+        <member name="T:Alsync.Api.AppServiceServiceCollectionExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Alsync.Api.AppServiceServiceCollectionExtensions.AddCustomServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            注入自定义服务。
+            </summary>
+            <param name="services"></param>
+            <param name="Configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Alsync.Api.AppServiceServiceCollectionExtensions.AddAppServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注入应用服务。
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Alsync.Api.AppServiceServiceCollectionExtensions.AddRepositories(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注入仓储服务。
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
