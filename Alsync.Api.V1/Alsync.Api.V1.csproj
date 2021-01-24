@@ -6,7 +6,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath></OutputPath>
-    <DocumentationFile>D:\Projects\alsync\Alsync.Api.V1\Alsync.Api.V1.xml</DocumentationFile>
+    <DocumentationFile>Alsync.Api.V1.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
