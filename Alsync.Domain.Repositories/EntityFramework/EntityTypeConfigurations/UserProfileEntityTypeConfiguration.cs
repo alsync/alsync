@@ -11,16 +11,25 @@ namespace Alsync.Domain.Repositories.EntityFramework.EntityTypeConfigurations
     {
         public override void Configure(EntityTypeBuilder<UserProfile> builder)
         {
-            builder.HasKey(m => m.ID);
-            builder.Property(m => m.Name)
-                .HasMaxLength(20)
-                .IsRequired();
-            builder.Property(m => m.Address)
+            builder.Property(p => p.Company)
                 .HasMaxLength(50);
 
-            builder.HasMany(m => m.Contacts)
-                .WithOne(m => m.Profile)
-                .HasForeignKey(m => m.ProfileID);
+            builder.OwnsOne(p => p.FullName, t =>
+            {
+                t.Property(p => p.FirstName)
+                    .HasColumnName(nameof(FullName.FirstName))
+                    .HasMaxLength(20);
+                t.Property(p => p.MiddleName)
+                    .HasColumnName(nameof(FullName.MiddleName))
+                    .HasMaxLength(20);
+                t.Property(p => p.LastName)
+                    .HasColumnName(nameof(FullName.LastName))
+                    .HasMaxLength(20);
+            });
+
+            builder.HasOne(m => m.User)
+                .WithOne(m => m.UserProfile)
+                .HasForeignKey<UserProfile>(m => m.ID);
 
             base.Configure(builder);
         }

@@ -11,28 +11,14 @@ namespace Alsync.Domain.Repositories.EntityFramework.EntityTypeConfigurations
     {
         public override void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.Property(m => m.UserName)
-                .HasMaxLength(100)
-                .IsRequired();
-            builder.Property(m => m.Password)
-                .HasMaxLength(100)
-                .IsRequired();
-
-            builder.OwnsOne(m => m.FullName, o =>
-            {
-                //o.ToTable("UserFullName");
-                o.Property(p => p.FirstName)
-                    .HasColumnName(nameof(FullName.FirstName))
-                    .HasMaxLength(20);
-                o.Property(p => p.MiddleName)
-                    .HasColumnName(nameof(FullName.MiddleName))
-                    .HasMaxLength(20);
-                o.Property(p => p.LastName)
-                    .HasColumnName(nameof(FullName.LastName))
-                    .HasMaxLength(20);
-            });
-            builder.HasIndex(m => m.UserName)
-                .IsUnique();
+            builder.Property(m => m.Name)
+                .HasMaxLength(20);
+            builder.Property(m => m.Avatar)
+                .HasMaxLength(200);
+            builder.Property(m => m.Company)
+                .HasMaxLength(50);
+            builder.Property(m => m.Address)
+                .HasMaxLength(50);
 
             base.Configure(builder);
         }

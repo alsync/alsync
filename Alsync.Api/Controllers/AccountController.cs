@@ -44,7 +44,6 @@ namespace Alsync.Api.Controllers
         [HttpGet("signout")]
         public void SignOut()
         {
-            this._userService.Login("abc", "abc");
         }
     }
 }

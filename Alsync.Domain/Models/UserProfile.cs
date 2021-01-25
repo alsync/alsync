@@ -14,25 +14,29 @@ namespace Alsync.Domain.Models
 
         }
 
-        public UserProfile(string name)
+        public UserProfile(string firstName, UserGender gender, int age, string company)
         {
-            this.Name = name;
-            this.CreateDate = DateTime.Now;
+            this.FullName = new FullName(firstName, "");
+            this.Gender = gender;
+            this.Age = age;
+            this.Company = company;
+
+            this.CreateDate = DateTimeOffset.Now;
         }
 
-        public string Name { get; private set; }
+        public virtual FullName FullName { get; private set; }
 
-        public string Avatar { get; private set; }
+        public UserGender Gender { get; set; }
 
-        public UserGender Gender { get; private set; }
+        public int Age { get; set; }
 
         public string Company { get; private set; }
 
-        public string Address { get; private set; }
+        public DateTimeOffset CreateDate { get; private set; }
 
-        public DateTime CreateDate { get; private set; }
+        public virtual User User { get; set; }
 
-        public virtual IList<Contact> Contacts { get; private set; }
+        //public virtual IList<Contact> Contacts { get; private set; }
     }
 
     public enum UserGender

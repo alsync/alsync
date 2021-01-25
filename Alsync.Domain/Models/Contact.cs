@@ -14,8 +14,8 @@ namespace Alsync.Domain.Models
 
         public DateTime CreateDate { get; protected set; }
 
-        public Guid ProfileID { get; protected set; }
+        //public Guid ProfileID { get; protected set; }
 
-        public virtual UserProfile Profile { get; protected set; }
+        //public virtual UserProfile Profile { get; protected set; }
     }
 }

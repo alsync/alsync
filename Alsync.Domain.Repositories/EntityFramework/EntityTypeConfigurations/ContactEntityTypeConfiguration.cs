@@ -18,9 +18,9 @@ namespace Alsync.Domain.Repositories.EntityFramework.EntityTypeConfigurations
                 .HasMaxLength(20)
                 .IsRequired();
 
-            builder.HasOne(m => m.Profile)
-                .WithMany(m => m.Contacts)
-                .HasForeignKey(m => m.ProfileID);
+            //builder.HasOne(m => m.Profile)
+            //    .WithMany(m => m.Contacts)
+            //    .HasForeignKey(m => m.ProfileID);
 
             base.Configure(builder);
         }

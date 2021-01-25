@@ -7,7 +7,7 @@ namespace Alsync.Domain.Models
     /// <summary>
     /// 表示名称的值对象。
     /// </summary>
-    public class FullName
+    public class FullName : ValueObject
     {
         #region Ctor
 
@@ -58,36 +58,6 @@ namespace Alsync.Domain.Models
 
 
         #region Public Methods.
-
-        /// <summary>
-        /// 确定此实例是否与另一个指定的 <see cref="FullName"/> 对象具有相同的值。
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-                return false;
-            if (ReferenceEquals(this, obj))
-                return true;
-            var other = obj as FullName;
-            if (other == null)
-                return false;
-            return this.FirstName.Equals(other.FirstName) &&
-                this.MiddleName.Equals(other.MiddleName) &&
-                this.LastName.Equals(other.LastName);
-        }
-
-        /// <summary>
-        /// 返回 <see cref="FullName"/> 的哈希代码。
-        /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode()
-        {
-            return this.FirstName.GetHashCode() ^
-                this.MiddleName.GetHashCode() ^
-                this.LastName.GetHashCode();
-        }
 
         /// <summary>
         /// 返回表示当前对象的字符串。

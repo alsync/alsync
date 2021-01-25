@@ -7,7 +7,7 @@ namespace Alsync.Domain.Models
     /// <summary>
     /// 表示电话的值对象。
     /// </summary>
-    public class Phone
+    public class Phone : ValueObject
     {
         #region Ctor
 
@@ -36,39 +36,6 @@ namespace Alsync.Domain.Models
         /// 获取或设置电话号码。
         /// </summary>
         public string PhoneNumber { get; set; }
-
-        #endregion
-
-
-        #region Public Methods
-
-        /// <summary>
-        /// 确定此实例是否与另一个指定的 <see cref="Phone"/> 对象具有相同的值。
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-                return false;
-            if (ReferenceEquals(this, obj))
-                return true;
-            var other = obj as Phone;
-            if (other == null)
-                return false;
-            return this.PhoneType.Equals(other.PhoneType) &&
-                this.PhoneNumber.Equals(other.PhoneNumber);
-        }
-
-        /// <summary>
-        /// 返回 <see cref="Phone"/> 的哈希代码。
-        /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode()
-        {
-            return this.PhoneType.GetHashCode() ^
-                this.PhoneNumber.GetHashCode();
-        }
 
         #endregion
     }

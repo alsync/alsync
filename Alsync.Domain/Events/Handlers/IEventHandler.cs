@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Alsync.Domain.Events.Handlers
 {
-    class UserEventHandler
+    public interface IEventHandler<in TEvent>
+         where TEvent : class, IEvent
     {
+        void Handle(TEvent evnt);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Alsync.Domain.Models
@@ -9,6 +10,11 @@ namespace Alsync.Domain.Models
     /// </summary>
     public class ValueObject
     {
+        /// <summary>
+        /// 确定此实例是否与另一个指定的对象具有相同的值。
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -31,9 +37,15 @@ namespace Alsync.Domain.Models
             return true;
         }
 
+        /// <summary>
+        /// 返回当前对象的哈希代码。
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return this.GetType()
+                .GetFields()
+                .Aggregate(0, (current, next) => current.GetHashCode() ^ next.GetHashCode());
         }
     }
 }

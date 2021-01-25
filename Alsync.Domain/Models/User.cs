@@ -7,43 +7,30 @@ namespace Alsync.Domain.Models
 {
     public class User : AggregateRoot
     {
-        public User(string userName, string password)
-        {
-            this.UserName = userName;
-            this.Password = password;
+        protected User() { }
 
-            this.CreateDate = DateTime.Now;
+        public User(string account, string password)
+        {
+            this.Name = "name";
+            this.UserAccount = new UserAccount(account, password);
+
+            this.CreateDate = DateTimeOffset.Now;
         }
 
-        public string UserName { get; private set; }
+        public string Name { get; private set; }
 
-        public string Password { get; private set; }
+        public string Avatar { get; private set; }
 
-        public FullName FullName { get; private set; }
+        public UserGender? Gender { get; private set; }
 
-        public int LoginCount { get; private set; }
+        public string Company { get; private set; }
 
-        public DateTimeOffset? LastLoginDate { get; private set; }
+        public string Address { get; private set; }
+
+        public  virtual UserAccount UserAccount { get; set; }
+
+        public virtual UserProfile UserProfile { get; set; }
 
         public DateTimeOffset CreateDate { get; private set; }
-
-        public void Login(string account, string password)
-        {
-            if (this.UserName == account && this.Password == password)
-            {
-                this.LoginCount += 1;
-                this.LastLoginDate = DateTime.Now;
-
-                //DomainEvent.Publish<UserLoggedEvent>(new UserLoggedEvent(this)
-                //{
-                //    Account = account,
-                //    Password = password
-                //});
-            }
-            else
-            {
-                throw new ValidationException("账号或者密码错误。");
-            }
-        }
     }
 }

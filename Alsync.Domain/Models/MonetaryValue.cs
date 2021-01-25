@@ -7,7 +7,7 @@ namespace Alsync.Domain.Models
     /// <summary>
     /// 表示币值的值对象。
     /// </summary>
-    public class MonetaryValue
+    public class MonetaryValue : ValueObject
     {
         #region Ctor
 
@@ -36,39 +36,6 @@ namespace Alsync.Domain.Models
         /// 获取或设置币种。
         /// </summary>
         public CurrencyType Currency { get; private set; }
-
-        #endregion
-
-
-        #region Public Methods
-
-        /// <summary>
-        /// 确定此实例是否与另一个指定的 <see cref="MonetaryValue"/> 对象具有相同的值。
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-                return false;
-            if (ReferenceEquals(this, obj))
-                return true;
-            var other = obj as MonetaryValue;
-            if (other == null)
-                return false;
-            return this.Amount.Equals(other.Amount) &&
-                this.Currency.Equals(other.Currency);
-        }
-
-        /// <summary>
-        /// 返回 <see cref="MonetaryValue"/> 的哈希代码。
-        /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode()
-        {
-            return this.Amount.GetHashCode() ^
-                this.Currency.GetHashCode();
-        }
 
         #endregion
     }
