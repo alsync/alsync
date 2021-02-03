@@ -27,7 +27,7 @@ namespace Alsync.Gateway
                 .AddConsul()
                 //.AddCacheManager(setting =>
                 //{
-                //    setting.WithDictionaryHandle(); //默认是字典存储，可自定义为Redis等存储
+                //    setting.WithDictionaryHandle(); //默认是字典存储，可替换成自定义比如Redis等存储
                 //})
                 .AddPolly();
 

@@ -12,17 +12,17 @@
       //],
       "UpstreamPathTemplate": "/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post" ],
-      "UseServiceDiscovery": true,
+      "UseServiceDiscovery": true, //使用服务发现
       "ServiceName": "alsync",
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
       },
-      // 缓存
+      //// 缓存-AddCacheManager
       //"FileCacheOptions": {
-      //  "TtlSeconds": 15,
+      //  "TtlSeconds": 15, //缓存时间15s
       //  "Region": "UserCache" //可以调用Api清理
       //},
-      // 熔断、超时
+      // 熔断、超时-Polly
       "QoSOptions": {
         // 熔断配置
         "ExceptionsAllowedBeforeBreaking": 3, //允许异常请求数
