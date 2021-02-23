@@ -232,7 +232,7 @@ namespace Alsync.Api
                 }))
                     .UseLazyLoadingProxies()
                     //.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-                    .UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+                    .UseMySql(Configuration.GetConnectionString("DefaultConnection"), ServerVersion.AutoDetect(Configuration.GetConnectionString("DefaultConnection")));
             });
 
             services.AddAppServices()
