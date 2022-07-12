@@ -119,7 +119,7 @@ namespace Alsync.Api
                     Version = "v2",
                     Title = "Alsync Api v2 docs"
                 });
-                Directory.GetFiles(AppContext.BaseDirectory, "*.xml").ToList().ForEach(p => options.IncludeXmlComments(p));
+                Directory.GetFiles(AppContext.BaseDirectory, "*.xml").ToList().ForEach(p => options.IncludeXmlComments(p, true));
 
                 // Add security definitions
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

@@ -17,3 +17,19 @@ services:
     ports:
       - "8002:80"
     container_name: alsync.api
+  alsync.api1:
+    image: alsync.api
+    build:
+      context: .
+      dockerfile: ./Alsync.Api/Dockerfile
+    ports:
+      - "8003:80"
+    container_name: alsync.api1
+  alsync.api2:
+    image: alsync.api
+    build:
+      context: .
+      dockerfile: ./Alsync.Api/Dockerfile
+    ports:
+      - "8004:80"
+    container_name: alsync.api2

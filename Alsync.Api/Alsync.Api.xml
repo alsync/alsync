@@ -4,6 +4,11 @@
         <name>Alsync.Api</name>
     </assembly>
     <members>
+        <member name="T:Alsync.Api.Controllers.AccountController">
+            <summary>
+            账户
+            </summary>
+        </member>
         <member name="M:Alsync.Api.Controllers.AccountController.#ctor(Alsync.IApplication.IUserService)">
             <summary>
             初始化 <see cref="T:Alsync.Api.Controllers.AccountController"/> 类的新实例。

@@ -3,7 +3,7 @@
     {
       "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
-      // ²ÉÓÃ·şÎñ·¢ÏÖ·½Ê½£¬È¡ÏûÏÂÓÎÖ÷»úÓë¶Ë¿ÚÉèÖÃ
+      // é‡‡ç”¨æœåŠ¡å‘ç°æ–¹å¼ï¼Œå–æ¶ˆä¸‹æ¸¸ä¸»æœºä¸ç«¯å£è®¾ç½®
       //"DownstreamHostAndPorts": [
       //  {
       //    "Host": "localhost",
@@ -12,31 +12,31 @@
       //],
       "UpstreamPathTemplate": "/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post" ],
-      "UseServiceDiscovery": true, //Ê¹ÓÃ·şÎñ·¢ÏÖ
+      "UseServiceDiscovery": true, //ä½¿ç”¨æœåŠ¡å‘ç°
       "ServiceName": "alsync",
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
       },
-      //// »º´æ-AddCacheManager
+      //// ç¼“å­˜-AddCacheManager
       //"FileCacheOptions": {
-      //  "TtlSeconds": 15, //»º´æÊ±¼ä15s
-      //  "Region": "UserCache" //¿ÉÒÔµ÷ÓÃApiÇåÀí
+      //  "TtlSeconds": 15, //ç¼“å­˜æ—¶é—´15s
+      //  "Region": "UserCache" //å¯ä»¥è°ƒç”¨Apiæ¸…ç†
       //},
-      // ÈÛ¶Ï¡¢³¬Ê±-Polly
+      // ç†”æ–­ã€è¶…æ—¶-Polly
       "QoSOptions": {
-        // ÈÛ¶ÏÅäÖÃ
-        "ExceptionsAllowedBeforeBreaking": 3, //ÔÊĞíÒì³£ÇëÇóÊı
-        "DurationOfBreak": 10000, //ÈÛ¶ÏµÄÊ±¼ä£¬µ¥Î»Îªms
-        // ³¬Ê±ÅäÖÃ
-        "TimeoutValue": 4000 //¶ÔÏÂÓÎµÄÇëÇó³¬¹ıÖ¸¶¨Ê±³¤×Ô¶¯½«ÇëÇóÉèÖÃÎª³¬Ê±£¬µ¥Î»Îªms£¬Ä¬ÈÏ90s
+        // ç†”æ–­é…ç½®
+        "ExceptionsAllowedBeforeBreaking": 3, //å…è®¸å¼‚å¸¸è¯·æ±‚æ•°
+        "DurationOfBreak": 10000, //ç†”æ–­çš„æ—¶é—´ï¼Œå•ä½ä¸ºms
+        // è¶…æ—¶é…ç½®
+        "TimeoutValue": 4000 //å¯¹ä¸‹æ¸¸çš„è¯·æ±‚è¶…è¿‡æŒ‡å®šæ—¶é•¿è‡ªåŠ¨å°†è¯·æ±‚è®¾ç½®ä¸ºè¶…æ—¶ï¼Œå•ä½ä¸ºmsï¼Œé»˜è®¤90s
       },
-      // ÏŞÁ÷¡ª¡ª¶ÏÂ·Æ÷£¬È«¾ÖÀï¿ÉÑ¡ÅäÖÃ×Ô¶¨ÒåĞÅÏ¢
+      // é™æµâ€”â€”æ–­è·¯å™¨ï¼Œå…¨å±€é‡Œå¯é€‰é…ç½®è‡ªå®šä¹‰ä¿¡æ¯
       "RateLimitOptions": {
-        "ClientWhitelist": [ "alsync", "arytry" ], //¿Í»§¶Ë°×Ãûµ¥ÎŞÏŞÁ÷ÏŞÖÆ¡£httpheaderÌí¼Ó½ÚµãClientId=alsync»òÕßClientId=arytry
+        "ClientWhitelist": [ "alsync", "arytry" ], //å®¢æˆ·ç«¯ç™½åå•æ— é™æµé™åˆ¶ã€‚httpheaderæ·»åŠ èŠ‚ç‚¹ClientId=alsyncæˆ–è€…ClientId=arytry
         "EnableRateLimiting": true,
-        "Period": "5s", //1s, 5m, 1h, 1d. Í³¼ÆÊ±¼ä¶Î
-        "PeriodTimespan": 10, //¶àÉÙÃëÖ®ºó¿ÉÖØĞÂÇëÇó
-        "Limit": 2 //Í³¼ÆÊ±¼ä¶ÎÄÚÔÊĞíµÄ×î´óÇëÇóÊıÁ¿
+        "Period": "5s", //1s, 5m, 1h, 1d. ç»Ÿè®¡æ—¶é—´æ®µ
+        "PeriodTimespan": 10, //å¤šå°‘ç§’ä¹‹åå¯é‡æ–°è¯·æ±‚
+        "Limit": 2 //ç»Ÿè®¡æ—¶é—´æ®µå†…å…è®¸çš„æœ€å¤§è¯·æ±‚æ•°é‡
       }
     }
   ],
@@ -45,11 +45,11 @@
       "Host": "192.168.222.135",
       "Port": 8500,
       "Type": "Consul"
-    },
-    //// ÏŞÁ÷È«¾ÖÅäÖÃ
+    }
+    //// é™æµå…¨å±€é…ç½®
     //"RateLimitOptions": {
     //  "DisableRateLimitHeaders": false,
-    //  "QuotaExceededMessage": "Too many request, may be later!", //×Ô¶¨ÒåÏŞÁ÷ºóµÄÌáÊ¾ĞÅÏ¢
+    //  "QuotaExceededMessage": "Too many request, may be later!", //è‡ªå®šä¹‰é™æµåçš„æç¤ºä¿¡æ¯
     //  "HttpStatusCode": 666,
     //  "ClientIdHeader": "ClientId"
     //}

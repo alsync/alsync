@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Alsync.Api.Controllers
 {
+    /// <summary>
+    /// 账户
+    /// </summary>
     [Produces("application/json")]
     [Route("api/Account")]
     public class AccountController : Controller

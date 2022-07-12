@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Alsync.Api.V2.Controllers
 {
+    /// <summary>
+    /// 账户
+    /// </summary>
     public class AccountController : HttpController
     {
         /// <summary>
